@@ -1,0 +1,6 @@
+{
+  "name": "Método FI®",
+  "description": "Landing Page Premium para o Método FI® - Fidelização Inteligente",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
