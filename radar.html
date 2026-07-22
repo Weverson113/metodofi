@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
     :root {
@@ -42,323 +43,115 @@
 
     .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
 
-    /* Header */
     .radar-header { text-align: center; margin-bottom: 48px; }
     .radar-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(212, 175, 55, 0.15);
-      padding: 12px 28px;
-      border-radius: 9999px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      display: inline-flex; align-items: center; gap: 12px;
+      background: rgba(212, 175, 55, 0.15); padding: 12px 28px;
+      border-radius: 9999px; margin-bottom: 24px; border: 1px solid rgba(212, 175, 55, 0.3);
     }
     .radar-logo-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--color-gold-500);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-navy-950);
+      width: 32px; height: 32px; background: var(--color-gold-500);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--color-navy-950);
     }
-    .radar-logo-text {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--color-gold-400);
-    }
+    .radar-logo-icon svg { width: 20px; height: 20px; }
+    .radar-logo-text { font-family: var(--font-heading); font-weight: 700; font-size: 1.25rem; color: var(--color-gold-400); }
     .radar-title {
-      font-family: var(--font-heading);
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 16px;
+      font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; margin-bottom: 16px;
       background: linear-gradient(135deg, #fff 0%, var(--color-gold-400) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .radar-subtitle {
-      font-size: 1.125rem;
-      color: var(--color-neutral-400);
-      font-weight: 300;
-    }
+    .radar-subtitle { font-size: 1.125rem; color: var(--color-neutral-400); font-weight: 300; }
 
-    /* Progress Bar */
     .progress-container {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 6px;
-      margin-bottom: 48px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 6px;
+      margin-bottom: 48px; border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .progress-bar {
-      height: 12px;
-      background: linear-gradient(90deg, var(--color-gold-500) 0%, var(--color-gold-400) 100%);
-      border-radius: 8px;
-      transition: width 0.5s ease;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+      height: 12px; background: linear-gradient(90deg, var(--color-gold-500) 0%, var(--color-gold-400) 100%);
+      border-radius: 8px; transition: width 0.5s ease; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
     }
-    .progress-text {
-      text-align: center;
-      margin-top: 12px;
-      font-size: 0.875rem;
-      color: var(--color-neutral-400);
-    }
+    .progress-text { text-align: center; margin-top: 12px; font-size: 0.875rem; color: var(--color-neutral-400); }
 
-    /* Quiz Card */
     .quiz-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 24px;
-      padding: 48px 40px;
-      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px; padding: 48px 40px; backdrop-filter: blur(20px);
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
     .question-number {
-      display: inline-block;
-      background: var(--color-gold-500);
-      color: var(--color-navy-950);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 1.25rem;
-      margin-bottom: 24px;
+      background: var(--color-gold-500); color: var(--color-navy-950);
+      width: 48px; height: 48px; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; margin-bottom: 24px;
     }
+    .question-text { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; margin-bottom: 32px; color: #fff; line-height: 1.3; }
 
-    .question-text {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 32px;
-      color: #fff;
-      line-height: 1.3;
-    }
-
-    .options-grid {
-      display: grid;
-      gap: 16px;
-    }
-
+    .options-grid { display: grid; gap: 16px; }
     .option-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 24px 28px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px; padding: 20px 24px; cursor: pointer; transition: all 0.3s ease;
+      display: flex; align-items: center; gap: 16px;
     }
-
-    .option-card:hover {
-      background: rgba(212, 175, 55, 0.1);
-      border-color: var(--color-gold-500);
-      transform: translateX(8px);
-    }
-
-    .option-card.selected {
-      background: rgba(212, 175, 55, 0.2);
-      border-color: var(--color-gold-500);
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-    }
-
+    .option-card:hover { background: rgba(212, 175, 55, 0.1); border-color: var(--color-gold-500); transform: translateX(8px); }
+    .option-card.selected { background: rgba(212, 175, 55, 0.2); border-color: var(--color-gold-500); box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
+    
     .option-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(212, 175, 55, 0.2);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-gold-400);
-      flex-shrink: 0;
+      width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .option-content h4 {
-      font-weight: 600;
-      font-size: 1.125rem;
-      margin-bottom: 4px;
-      color: #fff;
-    }
-
-    .option-content p {
-      font-size: 0.875rem;
-      color: var(--color-neutral-400);
-    }
+    .option-icon svg { width: 24px; height: 24px; }
+    
+    .option-content h4 { font-weight: 600; font-size: 1.125rem; margin-bottom: 4px; color: #fff; }
+    .option-content p { font-size: 0.875rem; color: var(--color-neutral-400); }
 
     .btn-next {
-      width: 100%;
-      margin-top: 32px;
-      padding: 20px 40px;
+      width: 100%; margin-top: 32px; padding: 20px 40px;
       background: linear-gradient(135deg, var(--color-gold-500) 0%, var(--color-gold-600) 100%);
-      color: var(--color-navy-950);
-      border: none;
-      border-radius: 16px;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.125rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+      color: var(--color-navy-950); border: none; border-radius: 16px;
+      font-family: var(--font-heading); font-weight: 700; font-size: 1.125rem;
+      cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
     }
+    .btn-next:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4); }
+    .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
-    .btn-next:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
-    }
-
-    .btn-next:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* Results Dashboard */
-    .results-dashboard {
-      display: none;
-    }
-
-    .results-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .score-circle {
-      width: 200px;
-      height: 200px;
-      margin: 0 auto 24px;
-      position: relative;
-    }
-
+    .results-dashboard { display: none; }
+    .results-header { text-align: center; margin-bottom: 48px; }
+    .score-circle { width: 200px; height: 200px; margin: 0 auto 24px; position: relative; }
     .score-value {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: var(--font-heading);
-      font-size: 3.5rem;
-      font-weight: 800;
-      color: var(--color-gold-400);
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-family: var(--font-heading); font-size: 3.5rem; font-weight: 800; color: var(--color-gold-400);
     }
+    .score-label { font-size: 1.125rem; color: var(--color-neutral-400); margin-top: 8px; }
 
-    .score-label {
-      font-size: 1.125rem;
-      color: var(--color-neutral-400);
-      margin-top: 8px;
-    }
+    .charts-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 48px; }
+    @media(min-width: 768px) { .charts-grid { grid-template-columns: 1fr 1fr; } }
+    .chart-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; }
+    .chart-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; color: #fff; }
 
-    .charts-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
-      margin-bottom: 48px;
-    }
-
-    @media(min-width: 768px) {
-      .charts-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    .chart-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 32px;
-    }
-
-    .chart-title {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-      color: #fff;
-    }
-
-    .insights-list {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 32px;
-      margin-bottom: 48px;
-    }
-
-    .insight-item {
-      padding: 20px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
+    .insights-list { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; margin-bottom: 48px; }
+    .insight-item { padding: 20px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start; }
     .insight-item:last-child { border-bottom: none; }
-
     .insight-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      margin-right: 12px;
-      font-size: 1.25rem;
+      display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;
+      border-radius: 8px; margin-right: 16px; flex-shrink: 0; font-size: 1.25rem;
     }
-
-    .insight-icon.positive { background: rgba(34, 197, 94, 0.2); }
-    .insight-icon.warning { background: rgba(234, 179, 8, 0.2); }
-    .insight-icon.critical { background: rgba(239, 68, 68, 0.2); }
-
-    .insight-text {
-      font-size: 1rem;
-      color: var(--color-neutral-300);
-    }
+    .insight-icon.positive { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+    .insight-icon.warning { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+    .insight-icon.critical { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    .insight-text { font-size: 1rem; color: var(--color-neutral-300); line-height: 1.5; }
 
     .cta-box {
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
-      border: 2px solid var(--color-gold-500);
-      border-radius: 24px;
-      padding: 48px 40px;
-      text-align: center;
+      border: 2px solid var(--color-gold-500); border-radius: 24px; padding: 48px 40px; text-align: center;
     }
-
-    .cta-box h3 {
-      font-family: var(--font-heading);
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #fff;
-    }
-
-    .cta-box p {
-      font-size: 1.125rem;
-      color: var(--color-neutral-400);
-      margin-bottom: 32px;
-    }
-
+    .cta-box h3 { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; margin-bottom: 16px; color: #fff; }
+    .cta-box p { font-size: 1.125rem; color: var(--color-neutral-400); margin-bottom: 32px; }
     .btn-whatsapp {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 20px 40px;
-      background: #25D366;
-      color: #fff;
-      border-radius: 16px;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.125rem;
-      text-decoration: none;
-      transition: all 0.3s ease;
+      display: inline-flex; align-items: center; gap: 12px; padding: 20px 40px;
+      background: #25D366; color: #fff; border-radius: 16px; font-family: var(--font-heading);
+      font-weight: 700; font-size: 1.125rem; text-decoration: none; transition: all 0.3s ease;
       box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
     }
-
-    .btn-whatsapp:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
-    }
-
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4); }
     .hidden { display: none !important; }
 
     @media(max-width: 768px) {
@@ -373,30 +166,24 @@
 <body>
 
   <div class="container">
-    <!-- Header -->
     <div class="radar-header">
       <div class="radar-logo">
-        <div class="radar-logo-icon"></div>
+        <div class="radar-logo-icon"><i data-lucide="target"></i></div>
         <span class="radar-logo-text">Radar FI®</span>
       </div>
       <h1 class="radar-title">Descubra seu Índice de Fidelização</h1>
       <p class="radar-subtitle">Responda 7 perguntas rápidas e receba uma análise completa da sua escola</p>
     </div>
 
-    <!-- Progress Bar -->
     <div class="progress-container">
       <div class="progress-bar" id="progressBar" style="width: 0%"></div>
       <div class="progress-text" id="progressText">Questão 1 de 7</div>
     </div>
 
-    <!-- Quiz -->
     <div class="quiz-card" id="quizCard">
-      <div id="questionContainer">
-        <!-- Questions will be inserted here by JavaScript -->
-      </div>
+      <div id="questionContainer"></div>
     </div>
 
-    <!-- Results Dashboard -->
     <div class="results-dashboard" id="resultsDashboard">
       <div class="results-header">
         <div class="score-circle">
@@ -420,16 +207,14 @@
 
       <div class="insights-list">
         <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 24px; color: #fff;">Análise do seu Radar</h3>
-        <div id="insightsContainer">
-          <!-- Insights will be inserted here -->
-        </div>
+        <div id="insightsContainer"></div>
       </div>
 
       <div class="cta-box">
         <h3>Quer transformar esses resultados?</h3>
         <p>Agende um Diagnóstico Estratégico gratuito e descubra como aplicar o Método FI® na sua escola.</p>
         <a href="https://wa.me/5531984706404?text=Ol%C3%A1%2C%20Prof.%20Weverson!%20Completei%20o%20Radar%20FI%C2%AE%20e%20gostaria%20de%20agendar%20o%20Diagn%C3%B3stico%20Estrat%C3%A9gico.%20Meu%20%C3%8Dndice%20FI%C2%AE%20foi%20de%20" target="_blank" class="btn-whatsapp" id="whatsappLink">
-          <span>💬</span>
+          <i data-lucide="message-circle" style="width: 24px; height: 24px;"></i>
           Agendar Diagnóstico Gratuito
         </a>
         <p style="margin-top: 16px; font-size: 0.875rem; color: var(--color-neutral-500);">100% Gratuito • Sem compromisso</p>
@@ -443,66 +228,66 @@
         id: 1,
         text: "Qual é a taxa média de evasão (cancelamento) de alunos na sua escola antes da conclusão do curso?",
         options: [
-          { icon: "✅", title: "Baixa (até 10%)", value: 10, score: 100 },
-          { icon: "️", title: "Média (entre 11% e 20%)", value: 15, score: 60 },
-          { icon: "❌", title: "Alta (acima de 20%)", value: 25, score: 20 },
-          { icon: "❓", title: "Não tenho esse controle exato", value: 0, score: 0 }
+          { icon: "check-circle", title: "Baixa (até 10%)", value: 10, score: 100, color: "#22c55e" },
+          { icon: "alert-circle", title: "Média (entre 11% e 20%)", value: 15, score: 60, color: "#eab308" },
+          { icon: "x-circle", title: "Alta (acima de 20%)", value: 25, score: 20, color: "#ef4444" },
+          { icon: "help-circle", title: "Não tenho esse controle exato", value: 0, score: 0, color: "#a3a3a3" }
         ]
       },
       {
         id: 2,
         text: "De 1 a 5, quão alinhados estão os setores da sua escola (Comercial, Secretaria e Pedagógico)?",
         options: [
-          { icon: "⭐", title: "5 - Totalmente alinhados e integrados", value: 5, score: 100 },
-          { icon: "", title: "4 - Bem alinhados na maioria das vezes", value: 4, score: 75 },
-          { icon: "😐", title: "3 - Mais ou menos, cada um faz um pouco diferente", value: 3, score: 50 },
-          { icon: "👎", title: "2 - Pouco alinhados, trabalham isolados", value: 2, score: 25 },
-          { icon: "💥", title: "1 - Totalmente desconectados", value: 1, score: 0 }
+          { icon: "star", title: "5 - Totalmente alinhados e integrados", value: 5, score: 100, color: "#facc15" },
+          { icon: "thumbs-up", title: "4 - Bem alinhados na maioria das vezes", value: 4, score: 75, color: "#22c55e" },
+          { icon: "minus", title: "3 - Mais ou menos, cada um faz um pouco diferente", value: 3, score: 50, color: "#eab308" },
+          { icon: "thumbs-down", title: "2 - Pouco alinhados, trabalham isolados", value: 2, score: 25, color: "#f97316" },
+          { icon: "x", title: "1 - Totalmente desconectados", value: 1, score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 3,
         text: "Sua escola possui um processo formal e padronizado de integração (onboarding) para novos alunos no primeiro mês?",
         options: [
-          { icon: "✅", title: "Sim, é muito bem estruturado e todos seguem", value: 1, score: 100 },
-          { icon: "⚠️", title: "Temos algo, mas cada um faz de um jeito", value: 0.5, score: 50 },
-          { icon: "❌", title: "Não, o aluno é apenas matriculado e liberado", value: 0, score: 0 }
+          { icon: "check-circle-2", title: "Sim, é muito bem estruturado e todos seguem", value: 1, score: 100, color: "#22c55e" },
+          { icon: "alert-triangle", title: "Temos algo, mas cada um faz de um jeito", value: 0.5, score: 50, color: "#eab308" },
+          { icon: "x-circle", title: "Não, o aluno é apenas matriculado e liberado", value: 0, score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 4,
         text: "Quando um aluno demonstra desmotivação, qual é a reação padrão da equipe?",
         options: [
-          { icon: "🎯", title: "Temos um protocolo ativo para resgatar esse aluno", value: 1, score: 100 },
-          { icon: "😐", title: "Depende da boa vontade do professor ou da secretaria", value: 0.5, score: 50 },
-          { icon: "❌", title: "Geralmente só percebemos quando ele pede cancelamento", value: 0, score: 0 }
+          { icon: "target", title: "Temos um protocolo ativo para resgatar esse aluno", value: 1, score: 100, color: "#22c55e" },
+          { icon: "user-x", title: "Depende da boa vontade do professor ou da secretaria", value: 0.5, score: 50, color: "#eab308" },
+          { icon: "bell-off", title: "Geralmente só percebemos quando ele pede cancelamento", value: 0, score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 5,
         text: "Com que frequência você coleta feedback dos alunos sobre a experiência deles na escola?",
         options: [
-          { icon: "📊", title: "Mensalmente ou trimestralmente", value: 1, score: 100 },
-          { icon: "", title: "Semestralmente ou anualmente", value: 0.5, score: 50 },
-          { icon: "❓", title: "Raramente ou nunca coletamos feedback", value: 0, score: 0 }
+          { icon: "calendar-check", title: "Mensalmente ou trimestralmente", value: 1, score: 100, color: "#22c55e" },
+          { icon: "calendar", title: "Semestralmente ou anualmente", value: 0.5, score: 50, color: "#eab308" },
+          { icon: "calendar-x", title: "Raramente ou nunca coletamos feedback", value: 0, score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 6,
         text: "Como você descreveria o senso de pertencimento dos alunos em relação à escola?",
         options: [
-          { icon: "❤️", title: "Forte - Alunos se sentem parte da escola, participam de eventos", value: 1, score: 100 },
-          { icon: "😐", title: "Médio - Alguns alunos se envolvem, outros não", value: 0.5, score: 50 },
-          { icon: "", title: "Fraco - Alunos vêm só para estudar e vão embora", value: 0, score: 0 }
+          { icon: "heart", title: "Forte - Alunos se sentem parte da escola, participam de eventos", value: 1, score: 100, color: "#22c55e" },
+          { icon: "heart-crack", title: "Médio - Alguns alunos se envolvem, outros não", value: 0.5, score: 50, color: "#eab308" },
+          { icon: "heart-off", title: "Fraco - Alunos vêm só para estudar e vão embora", value: 0, score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 7,
         text: "Sua equipe (professores, secretaria, comercial) recebe treinamento regular sobre experiência do aluno e retenção?",
         options: [
-          { icon: "", title: "Sim, treinamentos mensais ou trimestrais", value: 1, score: 100 },
-          { icon: "", title: "Ocasionalmente, quando sobra tempo", value: 0.5, score: 50 },
-          { icon: "❌", title: "Não, cada um aprende na prática", value: 0, score: 0 }
+          { icon: "graduation-cap", title: "Sim, treinamentos mensais ou trimestrais", value: 1, score: 100, color: "#22c55e" },
+          { icon: "clock", title: "Ocasionalmente, quando sobra tempo", value: 0.5, score: 50, color: "#eab308" },
+          { icon: "user-x", title: "Não, cada um aprende na prática", value: 0, score: 0, color: "#ef4444" }
         ]
       }
     ];
@@ -519,7 +304,9 @@
       question.options.forEach((option, index) => {
         optionsHTML += `
           <div class="option-card" onclick="selectOption(${index})" data-index="${index}">
-            <div class="option-icon">${option.icon}</div>
+            <div class="option-icon" style="color: ${option.color}">
+              <i data-lucide="${option.icon}"></i>
+            </div>
             <div class="option-content">
               <h4>${option.title}</h4>
             </div>
@@ -538,13 +325,14 @@
         </button>
       `;
 
+      if (window.lucide) {
+        lucide.createIcons();
+      }
       updateProgress();
     }
 
     function selectOption(index) {
-      document.querySelectorAll('.option-card').forEach(card => {
-        card.classList.remove('selected');
-      });
+      document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
       document.querySelector(`.option-card[data-index="${index}"]`).classList.add('selected');
       answers[questions[currentQuestion].id] = questions[currentQuestion].options[index];
       document.getElementById('nextBtn').disabled = false;
@@ -591,18 +379,15 @@
       }, 20);
 
       let label = '';
-      if (finalScore >= 80) label = 'Excelente! Sua escola tem alta fidelização ';
+      if (finalScore >= 80) label = 'Excelente! Sua escola tem alta fidelização 🏆';
       else if (finalScore >= 60) label = 'Bom! Mas há espaço para melhorias 📈';
       else if (finalScore >= 40) label = 'Atenção! Precisa de ajustes ⚠️';
       else label = 'Crítico! Ação imediata necessária 🚨';
       
-      setTimeout(() => {
-        document.getElementById('scoreLabel').textContent = label;
-      }, 1000);
+      setTimeout(() => { document.getElementById('scoreLabel').textContent = label; }, 1000);
     }
 
     function createCharts() {
-      // Radar Chart
       const radarCtx = document.getElementById('radarChart').getContext('2d');
       new Chart(radarCtx, {
         type: 'radar',
@@ -610,49 +395,31 @@
           labels: ['Retenção', 'Alinhamento', 'Onboarding', 'Resgate', 'Feedback', 'Pertencimento', 'Treinamento'],
           datasets: [{
             label: 'Sua Escola',
-            data: [
-              answers[1]?.score || 0,
-              answers[2]?.score || 0,
-              answers[3]?.score || 0,
-              answers[4]?.score || 0,
-              answers[5]?.score || 0,
-              answers[6]?.score || 0,
-              answers[7]?.score || 0
-            ],
+            data: [answers[1]?.score || 0, answers[2]?.score || 0, answers[3]?.score || 0, answers[4]?.score || 0, answers[5]?.score || 0, answers[6]?.score || 0, answers[7]?.score || 0],
             backgroundColor: 'rgba(212, 175, 55, 0.2)',
             borderColor: '#d4af37',
             pointBackgroundColor: '#d4af37',
             pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: '#d4af37'
           }]
         },
         options: {
           scales: {
             r: {
-              beginAtZero: true,
-              max: 100,
+              beginAtZero: true, max: 100,
               ticks: { color: 'rgba(255,255,255,0.6)' },
               grid: { color: 'rgba(255,255,255,0.1)' },
               angleLines: { color: 'rgba(255,255,255,0.1)' },
               pointLabels: { color: '#fff', font: { size: 11 } }
             }
           },
-          plugins: {
-            legend: { display: false }
-          }
+          plugins: { legend: { display: false } }
         }
       });
 
-      // Bar Chart
-      const categories = {
-        'Forças': [],
-        'Oportunidades': []
-      };
-
-      Object.entries(answers).forEach(([key, value]) => {
-        if (value.score >= 75) categories['Forças'].push(key);
-        else if (value.score < 50) categories['Oportunidades'].push(key);
+      const categories = { 'Forças': 0, 'Oportunidades': 0 };
+      Object.values(answers).forEach(value => {
+        if (value.score >= 75) categories['Forças']++;
+        else if (value.score < 50) categories['Oportunidades']++;
       });
 
       const barCtx = document.getElementById('barChart').getContext('2d');
@@ -662,25 +429,16 @@
           labels: ['Forças', 'Oportunidades'],
           datasets: [{
             label: 'Quantidade',
-            data: [categories['Forças'].length, categories['Oportunidades'].length],
+            data: [categories['Forças'], categories['Oportunidades']],
             backgroundColor: ['rgba(34, 197, 94, 0.6)', 'rgba(234, 179, 8, 0.6)']
           }]
         },
         options: {
           responsive: true,
-          plugins: {
-            legend: { display: false }
-          },
+          plugins: { legend: { display: false } },
           scales: {
-            y: {
-              beginAtZero: true,
-              ticks: { color: 'rgba(255,255,255,0.6)' },
-              grid: { color: 'rgba(255,255,255,0.1)' }
-            },
-            x: {
-              ticks: { color: '#fff' },
-              grid: { display: false }
-            }
+            y: { beginAtZero: true, ticks: { color: 'rgba(255,255,255,0.6)', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.1)' } },
+            x: { ticks: { color: '#fff' }, grid: { display: false } }
           }
         }
       });
@@ -688,38 +446,25 @@
 
     function generateInsights() {
       const insights = [];
-      
-      if (answers[1]?.score < 50) {
-        insights.push({ type: 'critical', text: 'Sua taxa de evasão está alta. Isso indica que os alunos não estão encontrando valor suficiente para permanecer.' });
-      }
-      
-      if (answers[2]?.score < 75) {
-        insights.push({ type: 'warning', text: 'Seus setores trabalham de forma desconectada. Isso gera experiências inconsistentes para os alunos.' });
-      }
-      
-      if (answers[3]?.score < 100) {
-        insights.push({ type: 'warning', text: 'Falta um processo estruturado de onboarding. Os primeiros 30 dias são cruciais para a retenção.' });
-      }
-      
-      if (answers[4]?.score < 100) {
-        insights.push({ type: 'warning', text: 'Você não tem um protocolo ativo de resgate. Alunos desmotivados precisam de ação proativa.' });
-      }
-      
-      if (answers[6]?.score < 75) {
-        insights.push({ type: 'warning', text: 'O senso de pertencimento está baixo. Alunos que não se sentem parte da escola têm maior chance de evadir.' });
-      }
+      if (answers[1]?.score < 50) insights.push({ type: 'critical', text: 'Sua taxa de evasão está alta. Isso indica que os alunos não estão encontrando valor suficiente para permanecer.' });
+      if (answers[2]?.score < 75) insights.push({ type: 'warning', text: 'Seus setores trabalham de forma desconectada. Isso gera experiências inconsistentes para os alunos.' });
+      if (answers[3]?.score < 100) insights.push({ type: 'warning', text: 'Falta um processo estruturado de onboarding. Os primeiros 30 dias são cruciais para a retenção.' });
+      if (answers[4]?.score < 100) insights.push({ type: 'warning', text: 'Você não tem um protocolo ativo de resgate. Alunos desmotivados precisam de ação proativa.' });
+      if (answers[6]?.score < 75) insights.push({ type: 'warning', text: 'O senso de pertencimento está baixo. Alunos que não se sentem parte da escola têm maior chance de evadir.' });
 
-      if (insights.length === 0) {
-        insights.push({ type: 'positive', text: 'Parabéns! Sua escola tem práticas excelentes de fidelização. Continue assim!' });
-      }
+      if (insights.length === 0) insights.push({ type: 'positive', text: 'Parabéns! Sua escola tem práticas excelentes de fidelização. Continue assim!' });
 
       const container = document.getElementById('insightsContainer');
       container.innerHTML = insights.map(insight => `
         <div class="insight-item">
-          <span class="insight-icon ${insight.type}">${insight.type === 'positive' ? '✅' : insight.type === 'warning' ? '⚠️' : ''}</span>
+          <div class="insight-icon ${insight.type}">
+            <i data-lucide="${insight.type === 'positive' ? 'check-circle' : insight.type === 'warning' ? 'alert-triangle' : 'x-circle'}"></i>
+          </div>
           <span class="insight-text">${insight.text}</span>
         </div>
       `).join('');
+      
+      if (window.lucide) lucide.createIcons();
     }
 
     function updateWhatsAppLink() {
@@ -728,8 +473,9 @@
       link.setAttribute('href', currentHref + totalScore);
     }
 
-    // Initialize
-    renderQuestion();
+    window.addEventListener('DOMContentLoaded', () => {
+      renderQuestion();
+    });
   </script>
 </body>
 </html>
