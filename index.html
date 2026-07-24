@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Método FI® - Fidelização Inteligente</title>
+  <meta name="description" content="O Método FI® transforma matrículas em alunos que permanecem. Metodologia de fidelização para escolas profissionalizantes." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --navy-950: #050d1a;
+      --navy-900: #0a192f;
+      --navy-850: #0d1f38;
+      --navy-800: #102a43;
+      --gold-400: #facc15;
+      --gold-500: #d4af37;
+      --gold-600: #ca8a04;
+      --neutral-300: #cbd5e1;
+      --neutral-400: #94a3b8;
+      --neutral-500: #64748b;
+      --white: #ffffff;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --glass: rgba(255,255,255,0.03);
+      --glass-border: rgba(255,255,255,0.08);
+      --gold-border: rgba(212,175,55,0.25);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--navy-950);
+      color: var(--neutral-300);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1,h2,h3,h4 { font-family: var(--font-heading); color: var(--white); }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; font-family: inherit; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .text-gold { color: var(--gold-500); }
+    .relative { position: relative; }
+    .z-10 { position: relative; z-index: 10; }
+
+    /* REVEAL ANIMATION */
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 32px; border-radius: 9999px; font-family: var(--font-heading); font-weight: 600; font-size: 1rem; transition: all 0.35s cubic-bezier(0.16,1,0.3,1); }
+    .btn svg { width: 18px; height: 18px; transition: transform 0.3s ease; }
+    .btn:hover svg { transform: translateX(4px); }
+    .btn-gold { background: linear-gradient(135deg, var(--gold-500), var(--gold-600)); color: var(--navy-950); box-shadow: 0 12px 30px -8px rgba(212,175,55,0.5); }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -8px rgba(212,175,55,0.6); }
+    .btn-outline { background: rgba(255,255,255,0.04); border: 1px solid var(--gold-border); color: var(--white); backdrop-filter: blur(10px); }
+    .btn-outline:hover { background: rgba(212,175,55,0.12); border-color: var(--gold-500); transform: translateY(-3px); }
+    .btn-wa { background: #25D366; color: #fff; box-shadow: 0 12px 30px -8px rgba(37,211,102,0.5); }
+    .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -8px rgba(37,211,102,0.6); }
+
+    /* NAVBAR */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 0; transition: all 0.4s ease; }
+    .navbar.scrolled { padding: 10px 0; background: rgba(5,13,26,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--glass-border); }
+    .navbar-container { display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--gold-500), var(--gold-600)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--navy-950); box-shadow: 0 6px 18px -4px rgba(212,175,55,0.5); }
+    .logo-icon svg { width: 20px; height: 20px; }
+    .logo-text { font-family: var(--font-heading); font-weight: 800; font-size: 1.2rem; color: var(--white); letter-spacing: -0.02em; }
+    .logo-text .reg { font-size: 0.8rem; color: var(--gold-500); vertical-align: top; }
+    .nav-links { display: none; gap: 36px; }
+    .nav-links a { font-size: 0.92rem; font-weight: 500; color: var(--neutral-400); transition: color 0.3s ease; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: var(--gold-500); transition: width 0.3s ease; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .nav-contact { display: none; font-size: 0.9rem; font-weight: 600; color: var(--neutral-300); transition: color 0.3s ease; }
+    .nav-contact:hover { color: var(--gold-500); }
+    .btn-nav { padding: 12px 24px; font-size: 0.9rem; }
+    @media(min-width: 900px) { .nav-links { display: flex; } .nav-contact { display: inline-block; } }
+
+    /* HERO */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 140px 0 100px; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.32; }
+    .hero-overlay-1 { position: absolute; inset: 0; background: linear-gradient(to top, var(--navy-950) 0%, rgba(5,13,26,0.85) 45%, rgba(5,13,26,0.6) 100%); }
+    .hero-overlay-2 { position: absolute; inset: 0; background: linear-gradient(to right, var(--navy-950) 0%, rgba(5,13,26,0.7) 55%, transparent 100%); }
+    .hero-glow { position: absolute; top: 20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(212,175,55,0.18) 0%, transparent 65%); filter: blur(40px); z-index: 1; pointer-events: none; }
+    .hero-content { position: relative; z-index: 10; max-width: 820px; }
+    .hero-badge { display: inline-flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+    .badge-inner { display: inline-flex; align-items: center; gap: 10px; background: rgba(212,175,55,0.1); border: 1px solid var(--gold-border); padding: 8px 18px; border-radius: 9999px; backdrop-filter: blur(10px); }
+    .badge-icon { width: 22px; height: 22px; color: var(--gold-500); display: flex; align-items: center; }
+    .badge-icon svg { width: 16px; height: 16px; }
+    .badge-text-gold { color: var(--gold-500); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .badge-dot { color: rgba(255,255,255,0.3); }
+    .badge-text-white { color: rgba(255,255,255,0.75); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .hero-subtitle-top { color: var(--neutral-400); font-size: 0.95rem; font-weight: 300; }
+    .hero-title { font-size: clamp(2.4rem, 6vw, 4.4rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 28px; }
+    .hero-title .text-gold { background: linear-gradient(135deg, var(--gold-400), var(--gold-600)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-description { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--neutral-400); font-weight: 300; line-height: 1.7; margin-bottom: 40px; max-width: 640px; }
+    .hero-buttons { display: flex; flex-direction: column; gap: 16px; }
+    @media(min-width: 640px) { .hero-buttons { flex-direction: row; } }
+
+    /* STATS BAR */
+    .stats { position: relative; background: var(--navy-900); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); padding: 56px 0; overflow: hidden; }
+    .stats::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80%; height: 1px; background: linear-gradient(to right, transparent, var(--gold-500), transparent); }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 24px; text-align: center; }
+    @media(min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+    .stat-number { font-family: var(--font-heading); font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 800; color: var(--gold-500); line-height: 1; letter-spacing: -0.02em; }
+    .stat-label { margin-top: 10px; font-size: 0.85rem; color: var(--neutral-400); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
+
+    /* SECTION HEADERS */
+    section { position: relative; }
+    .section-pad { padding: 120px 0; }
+    @media(min-width: 640px) { .section-pad { padding: 150px 0; } }
+    .section-header { max-width: 760px; margin: 0 auto 72px; text-align: center; }
+    .section-header.align-left { text-align: left; margin-left: 0; }
+    .section-badge { display: inline-block; color: var(--gold-500); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 18px; }
+    .section-badge::before { content: ''; display: inline-block; width: 28px; height: 2px; background: var(--gold-500); vertical-align: middle; margin-right: 12px; }
+    .section-header.align-left .section-badge::before { display: none; }
+    .section-title { font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 800; line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 22px; }
+    .section-subtitle { color: var(--neutral-400); font-size: 1.1rem; font-weight: 300; line-height: 1.7; }
+    .section-header.align-left .section-subtitle { max-width: 600px; }
+
+    /* PROBLEM */
+    .problem { background: var(--navy-950); }
+    .problem-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
+    @media(min-width: 768px) { .problem-grid { grid-template-columns: repeat(2, 1fr); } }
+    .problem-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px 34px; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .problem-card:hover { transform: translateY(-8px); border-color: var(--gold-border); background: rgba(212,175,55,0.04); box-shadow: 0 24px 48px -16px rgba(0,0,0,0.6); }
+    .problem-icon { width: 58px; height: 58px; border-radius: 16px; background: rgba(212,175,55,0.1); color: var(--gold-500); display: flex; align-items: center; justify-content: center; margin-bottom: 26px; transition: all 0.4s ease; }
+    .problem-icon svg { width: 28px; height: 28px; }
+    .problem-card:hover .problem-icon { background: var(--gold-500); color: var(--navy-950); transform: scale(1.08) rotate(-5deg); }
+    .problem-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 14px; }
+    .problem-card p { color: var(--neutral-400); font-size: 0.98rem; }
+    .problem-image { border-radius: 24px; overflow: hidden; border: 1px solid var(--glass-border); max-height: 420px; }
+    .problem-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+    .problem-image:hover img { transform: scale(1.04); }
+
+    /* METHODOLOGY */
+    .methodology { background: var(--navy-900); overflow: hidden; }
+    .methodology-bg { position: absolute; inset: 0; z-index: 0; }
+    .methodology-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.08; }
+    .methodology-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--navy-900), rgba(10,25,47,0.85), var(--navy-900)); }
+    .methodology-steps { position: relative; display: grid; grid-template-columns: 1fr; gap: 24px; z-index: 10; }
+    @media(min-width: 768px) { .methodology-steps { grid-template-columns: repeat(3, 1fr); } }
+    @media(min-width: 1024px) { .methodology-steps { grid-template-columns: repeat(5, 1fr); gap: 18px; } }
+    .steps-line { display: none; position: absolute; top: 42px; left: 5%; right: 5%; height: 2px; background: linear-gradient(to right, transparent, var(--gold-border), var(--gold-border), transparent); z-index: 0; }
+    @media(min-width: 1024px) { .steps-line { display: block; } }
+    .step-card { position: relative; z-index: 2; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 34px 22px; text-align: center; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); backdrop-filter: blur(8px); }
+    .step-card:hover { transform: translateY(-8px); border-color: var(--gold-border); box-shadow: 0 24px 48px -16px rgba(0,0,0,0.6); }
+    .step-icon { width: 84px; height: 84px; margin: 0 auto 22px; border-radius: 50%; background: var(--navy-850); border: 1px solid var(--gold-border); color: var(--gold-500); display: flex; align-items: center; justify-content: center; position: relative; transition: all 0.4s ease; }
+    .step-icon svg { width: 34px; height: 34px; }
+    .step-card:hover .step-icon { background: var(--gold-500); color: var(--navy-950); transform: scale(1.06); }
+    .step-number { position: absolute; bottom: -2px; right: -2px; width: 28px; height: 28px; border-radius: 50%; background: var(--gold-400); color: var(--navy-950); font-family: var(--font-heading); font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; border: 3px solid var(--navy-900); }
+    .step-card h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 10px; }
+    .step-card p { font-size: 0.88rem; color: var(--neutral-400); }
+
+    /* BENEFITS */
+    .benefits { background: var(--navy-950); }
+    .benefits-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media(min-width: 768px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); align-items: stretch; } }
+    .benefit-item { display: flex; gap: 22px; padding: 30px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .benefit-item:hover { transform: translateY(-6px); border-color: var(--gold-border); background: rgba(212,175,55,0.04); }
+    .benefit-icon-wrapper { flex-shrink: 0; }
+    .benefit-icon { width: 60px; height: 60px; border-radius: 16px; background: rgba(212,175,55,0.1); color: var(--gold-500); display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; }
+    .benefit-icon svg { width: 28px; height: 28px; }
+    .benefit-item:hover .benefit-icon { background: var(--gold-500); color: var(--navy-950); transform: scale(1.08) rotate(5deg); }
+    .benefit-content h3 { font-size: 1.18rem; font-weight: 700; margin-bottom: 10px; }
+    .benefit-content p { color: var(--neutral-400); font-size: 0.96rem; }
+    .benefit-image { border-radius: 20px; overflow: hidden; min-height: 220px; position: relative; border: 1px solid var(--glass-border); }
+    .benefit-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,13,26,0.5), transparent); }
+    .benefit-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+    .benefit-image:hover img { transform: scale(1.06); }
+
+    /* CREATOR */
+    .creator { background: var(--navy-900); overflow: hidden; }
+    .creator-bg { position: absolute; inset: 0; z-index: 0; }
+    .creator-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.1; filter: blur(3px); }
+    .creator-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--navy-900) 0%, rgba(10,25,47,0.85) 60%, rgba(10,25,47,0.92) 100%); }
+    .creator-grid { display: grid; grid-template-columns: 1fr; gap: 56px; align-items: center; }
+    @media(min-width: 1024px) { .creator-grid { grid-template-columns: 1.1fr 0.9fr; } }
+    .creator-content { order: 2; }
+    @media(min-width: 1024px) { .creator-content { order: 1; } }
+    .section-badge-gold { display: inline-block; color: var(--gold-500); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 16px; }
+    .creator-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; margin-bottom: 10px; }
+    .creator-role { color: var(--gold-500); font-weight: 600; font-size: 1.1rem; margin-bottom: 4px; }
+    .creator-brand { color: var(--neutral-400); margin-bottom: 26px; }
+    .creator-divider { width: 64px; height: 4px; background: linear-gradient(to right, var(--gold-500), var(--gold-600)); border-radius: 9999px; margin-bottom: 28px; }
+    .creator-content p { color: var(--neutral-300); font-size: 1.08rem; font-weight: 300; line-height: 1.75; margin-bottom: 20px; }
+    .creator-image { order: 1; position: relative; }
+    @media(min-width: 1024px) { .creator-image { order: 2; } }
+    .image-bg { position: absolute; inset: 0; background: rgba(212,175,55,0.12); border-radius: 28px; transform: translate(18px, 18px); }
+    .creator-image img { position: relative; z-index: 2; width: 100%; max-width: 440px; margin: 0 auto; border-radius: 28px; aspect-ratio: 4/5; object-fit: cover; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.7); border: 1px solid var(--gold-border); }
+
+    /* GALLERY */
+    .gallery { background: var(--navy-950); }
+    .gallery-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 48px; }
+    @media(min-width: 768px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; } }
+    .gallery-item { border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; border: 1px solid var(--glass-border); box-shadow: 0 20px 40px -16px rgba(0,0,0,0.6); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-caption { text-align: center; font-family: var(--font-heading); font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 600; font-style: italic; color: var(--white); max-width: 720px; margin: 0 auto; line-height: 1.4; }
+    .gallery-caption span { color: var(--gold-500); }
+
+    /* CTA */
+    .cta { background: var(--navy-900); overflow: hidden; }
+    .cta-bg-image { position: absolute; inset: 0; z-index: 0; }
+    .cta-bg-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0.18; }
+    .cta-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,25,47,0.95), rgba(5,13,26,0.88)); }
+    .cta-glow { position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 700px; height: 500px; background: radial-gradient(circle, rgba(212,175,55,0.16) 0%, transparent 65%); filter: blur(50px); z-index: 1; pointer-events: none; }
+    .cta .container { position: relative; z-index: 10; }
+    .cta-card { max-width: 860px; margin: 0 auto; text-align: center; background: rgba(255,255,255,0.03); border: 1px solid var(--gold-border); border-radius: 32px; padding: 64px 40px; backdrop-filter: blur(20px); position: relative; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(0,0,0,0.7); }
+    .cta-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(to right, var(--gold-400), var(--gold-600)); }
+    .cta-card h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 800; line-height: 1.2; margin-bottom: 22px; letter-spacing: -0.02em; }
+    .cta-card > p { font-size: 1.15rem; color: var(--neutral-400); font-weight: 300; line-height: 1.7; max-width: 620px; margin: 0 auto 38px; }
+    .cta-buttons { display: flex; flex-direction: column; gap: 16px; align-items: center; margin-bottom: 24px; }
+    @media(min-width: 640px) { .cta-buttons { flex-direction: row; justify-content: center; } }
+    .cta-disclaimer { font-size: 0.78rem; color: var(--neutral-500); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+
+    /* FOOTER */
+    .footer { background: var(--navy-950); border-top: 1px solid var(--glass-border); padding: 80px 0 36px; text-align: center; }
+    .footer-content { display: flex; flex-direction: column; align-items: center; margin-bottom: 56px; }
+    .footer-brand-name { font-family: var(--font-heading); font-weight: 800; font-size: 1.8rem; color: var(--white); line-height: 1; margin-bottom: 10px; }
+    .footer-brand-sub { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-500); margin-bottom: 22px; }
+    .footer-brand-quote { color: var(--neutral-400); font-style: italic; font-size: 1.1rem; margin-bottom: 36px; }
+    .footer-socials { display: flex; gap: 16px; }
+    .social-btn { width: 54px; height: 54px; border-radius: 50%; background: var(--glass); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; color: var(--neutral-400); transition: all 0.35s ease; }
+    .social-btn:hover { color: var(--navy-950); background: var(--gold-500); border-color: var(--gold-500); transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(212,175,55,0.5); }
+    .social-btn svg { width: 22px; height: 22px; }
+    .footer-bottom { border-top: 1px solid var(--glass-border); padding-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 16px; font-size: 0.85rem; color: var(--neutral-500); }
+    @media(min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { transition: color 0.3s ease; }
+    .footer-links a:hover { color: var(--gold-500); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <div class="logo">
+        <div class="logo-icon"><i data-lucide="target"></i></div>
+        <span class="logo-text">Método FI<span class="reg">®</span></span>
+      </div>
+      <div class="nav-links">
+        <a href="#problema">O Problema</a>
+        <a href="#metodologia">A Metodologia</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#creator">Sobre</a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://wa.me/5531984706404?text=Ol%C3%A1%2C%20Prof.%20Weverson!%20Vi%20o%20site%20do%20M%C3%A9todo%20FI%C2%AE%20e%20gostaria%20de%20agendar%20o%20Diagn%C3%B3stico%20Gratuito%20da%20minha%20escola." target="_blank" class="nav-contact">Falar com especialista</a>
+        <button class="btn btn-gold btn-nav" onclick="window.open('https://wa.me/5531984706404?text=Ol%C3%A1%2C%20Prof.%20Weverson!%20Vi%20o%20site%20do%20M%C3%A9todo%20FI%C2%AE%20e%20gostaria%20de%20agendar%20o%20Diagn%C3%B3stico%20Gratuito%20da%20minha%20escola.', '_blank')">Fazer Diagnóstico</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="./assets/images/treinamento_equipe_1784751749453.jpg" alt="Treinamento de equipe" />
+      <div class="hero-overlay-1"></div>
+      <div class="hero-overlay-2"></div>
+    </div>
+    <div class="hero-glow"></div>
+    <div class="container hero-content">
+      <div class="hero-badge reveal">
+        <div class="badge-inner">
+          <div class="badge-icon"><i data-lucide="target"></i></div>
+          <span class="badge-text-gold">Método FI®</span>
+          <span class="badge-dot">•</span>
+          <span class="badge-text-white">Fidelização Inteligente®</span>
+        </div>
+        <p class="hero-subtitle-top">A metodologia criada para transformar matrículas em alunos que permanecem.</p>
+      </div>
+      <h1 class="hero-title reveal">
+        Sua escola cria <span class="text-gold">alunos fiéis...</span><br>
+        ou apenas realiza matrículas?
+      </h1>
+      <p class="hero-description reveal">
+        O Método FI® é uma metodologia criada para transformar a jornada do aluno, fortalecer equipes e aumentar a retenção nas escolas profissionalizantes.
+      </p>
+      <div class="hero-buttons reveal">
+        <a href="./radar.html" class="btn btn-gold">
+          Fazer Diagnóstico Gratuito
+          <i data-lucide="arrow-right"></i>
+        </a>
+        <button class="btn btn-outline" onclick="document.getElementById('metodologia').scrollIntoView({behavior: 'smooth'})">
+          Como funciona o Método FI®
+          <i data-lucide="chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-number" data-target="18" data-suffix="+">0</div>
+          <div class="stat-label">Anos na educação</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number" data-target="7" data-suffix="">0</div>
+          <div class="stat-label">Pilares proprietários</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number" data-target="5" data-suffix="">0</div>
+          <div class="stat-label">Etapas de implantação</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number" data-target="100" data-suffix="%">0</div>
+          <div class="stat-label">Foco em retenção</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O PROBLEMA -->
+  <section class="problem section-pad" id="problema">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">O Cenário Atual</span>
+        <h2 class="section-title">
+          O verdadeiro desafio não é conquistar novos alunos.<br>
+          É fazer com que eles escolham <span class="text-gold">permanecer</span>.
+        </h2>
+        <p class="section-subtitle">
+          Toda escola investe em marketing para conquistar matrículas. Poucas investem em construir uma experiência que faz o aluno permanecer até a conclusão do curso.
+        </p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card reveal">
+          <div class="problem-icon"><i data-lucide="trending-down"></i></div>
+          <h3>Baixa Retenção</h3>
+          <p>Alunos deixam o curso antes da conclusão porque não encontram uma experiência que gere pertencimento e acompanhamento contínuo.</p>
+        </div>
+        <div class="problem-card reveal">
+          <div class="problem-icon"><i data-lucide="users"></i></div>
+          <h3>Experiência Inconsistente</h3>
+          <p>Cada colaborador atende de uma forma diferente, criando experiências desiguais para os alunos.</p>
+        </div>
+        <div class="problem-card reveal">
+          <div class="problem-icon"><i data-lucide="puzzle"></i></div>
+          <h3>Equipes Desconectadas</h3>
+          <p>Comercial, secretaria e pedagógico trabalham bem individualmente, mas pouco conectados entre si.</p>
+        </div>
+        <div class="problem-card reveal">
+          <div class="problem-icon"><i data-lucide="heart-crack"></i></div>
+          <h3>Falta de Pertencimento</h3>
+          <p>Quando alunos e colaboradores não criam vínculo com a escola, a retenção torna-se muito mais difícil.</p>
+        </div>
+      </div>
+      <div class="problem-image reveal">
+        <img src="./assets/images/problema-escola.jpg" alt="Desafios da gestão escolar" loading="lazy" onerror="this.parentElement.style.display='none'">
+      </div>
+    </div>
+  </section>
+
+  <!-- METODOLOGIA -->
+  <section class="methodology section-pad" id="metodologia">
+    <div class="methodology-bg">
+      <img src="./assets/images/treinamento_equipe_2_1784751782346.jpg" alt="Treinamento de Equipe" loading="lazy">
+      <div class="methodology-overlay"></div>
+    </div>
+    <div class="container relative z-10">
+      <div class="section-header align-left reveal">
+        <span class="section-badge">A Solução</span>
+        <h2 class="section-title">
+          Muito além do Onboarding.<br>
+          <span class="text-gold">Um método para construir escolas onde alunos querem permanecer.</span>
+        </h2>
+        <p class="section-subtitle">
+          O Método FI® integra pessoas, processos e cultura para transformar a experiência do aluno desde o primeiro dia.
+        </p>
+      </div>
+      <div class="methodology-steps">
+        <div class="steps-line"></div>
+        <div class="step-card reveal">
+          <div class="step-icon"><i data-lucide="target"></i><div class="step-number">1</div></div>
+          <h3>Radar FI®</h3>
+          <p>Avaliação inicial da instituição</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-icon"><i data-lucide="activity"></i><div class="step-number">2</div></div>
+          <h3>Diagnóstico Estratégico</h3>
+          <p>Análise estratégica profunda</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-icon"><i data-lucide="rocket"></i><div class="step-number">3</div></div>
+          <h3>Plano de Implantação</h3>
+          <p>Planejamento estruturado</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-icon"><i data-lucide="settings"></i><div class="step-number">4</div></div>
+          <h3>Implantação do Método FI®</h3>
+          <p>Metodologia na prática</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-icon"><i data-lucide="line-chart"></i><div class="step-number">5</div></div>
+          <h3>Acompanhamento Estratégico</h3>
+          <p>Medição de resultados</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFÍCIOS -->
+  <section class="benefits section-pad" id="beneficios">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">Resultados Reais</span>
+        <h2 class="section-title">
+          O que acontece quando a Fidelização Inteligente® passa a fazer parte da cultura da escola.
+        </h2>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-item reveal">
+          <div class="benefit-icon-wrapper"><div class="benefit-icon"><i data-lucide="shield-check"></i></div></div>
+          <div class="benefit-content">
+            <h3>Alunos permanecem por mais tempo</h3>
+            <p>Crie estratégias e vínculos reais para aumentar a retenção de forma duradoura.</p>
+          </div>
+        </div>
+        <div class="benefit-image reveal">
+          <img src="./assets/images/alunos-felizes.jpg" alt="Alunos felizes na escola" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="benefit-item reveal">
+          <div class="benefit-icon-wrapper"><div class="benefit-icon"><i data-lucide="users-round"></i></div></div>
+          <div class="benefit-content">
+            <h3>Equipes trabalham como uma só</h3>
+            <p>Comercial, secretaria e pedagógico atuam de forma integrada.</p>
+          </div>
+        </div>
+        <div class="benefit-image reveal">
+          <img src="./assets/images/integracao_colaboradores_1784751798103.jpg" alt="Integração de colaboradores" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="benefit-item reveal">
+          <div class="benefit-icon-wrapper"><div class="benefit-icon"><i data-lucide="star"></i></div></div>
+          <div class="benefit-content">
+            <h3>A experiência do aluno se transforma</h3>
+            <p>Cada contato fortalece confiança, pertencimento e satisfação.</p>
+          </div>
+        </div>
+        <div class="benefit-image reveal">
+          <div class="benefit-image"></div>
+          <img src="./assets/images/equipe-alinhada.jpg" alt="Equipe alinhada e motivada" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="benefit-item reveal">
+          <div class="benefit-icon-wrapper"><div class="benefit-icon"><i data-lucide="layout-template"></i></div></div>
+          <div class="benefit-content">
+            <h3>Todos sabem exatamente como agir</h3>
+            <p>Processos claros geram segurança e qualidade no atendimento.</p>
+          </div>
+        </div>
+        <div class="benefit-item reveal">
+          <div class="benefit-icon-wrapper"><div class="benefit-icon"><i data-lucide="network"></i></div></div>
+          <div class="benefit-content">
+            <h3>Setores deixam de competir</h3>
+            <p>A escola passa a funcionar como um único ecossistema.</p>
+          </div>
+        </div>
+        <div class="benefit-item reveal">
+          <div class="benefit-icon-wrapper"><div class="benefit-icon"><i data-lucide="heart"></i></div></div>
+          <div class="benefit-content">
+            <h3>Cultura de pertencimento</h3>
+            <p>Alunos e colaboradores sentem orgulho de fazer parte da instituição.</p>
+          </div>
+        </div>
+        <div class="benefit-image reveal">
+          <img src="./assets/images/pais-satisfeitos.jpg" alt="Pais e alunos satisfeitos" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATOR -->
+  <section class="creator section-pad" id="creator">
+    <div class="creator-bg">
+      <img src="./assets/images/treinamento_fundo_1784751766380.jpg" alt="Treinamento de Equipes" loading="lazy">
+      <div class="creator-overlay"></div>
+    </div>
+    <div class="container creator-grid relative z-10">
+      <div class="creator-content reveal">
+        <span class="section-badge-gold">A Origem do Método FI®</span>
+        <h2 class="creator-title"><span class="text-gold">Prof. Weverson Rocha</span></h2>
+        <p class="creator-role">Especialista em Gestão Educacional</p>
+        <p class="creator-brand">Criador do Método FI® - Fidelização Inteligente®</p>
+        <div class="creator-divider"></div>
+        <p>Há mais de 18 anos atuando na educação, formando pessoas, liderando equipes e estruturando processos que fortalecem experiências, pertencimento e resultados.</p>
+        <p>O Método FI® nasceu da experiência prática em gestão educacional e da percepção de que escolas de sucesso não apenas conquistam alunos. Elas constroem ambientes onde pessoas desejam permanecer.</p>
+      </div>
+      <div class="creator-image reveal">
+        <div class="image-bg"></div>
+        <img src="./assets/images/weverson_rocha.jpg" alt="Prof. Weverson Rocha" onerror="this.src='./assets/images/weverson.jpeg'">
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery section-pad" id="galeria">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">Impacto Real</span>
+        <h2 class="section-title">O Método FI® em ação</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <img src="./assets/images/acolhimento_alunos_1784751816756.jpg" alt="Acolhimento de alunos" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="gallery-item reveal" style="transition-delay: 0.1s">
+          <img src="./assets/images/alunos_chegando_1784751731827.jpg" alt="Alunos chegando" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="gallery-item reveal" style="transition-delay: 0.2s">
+          <img src="./assets/images/escola-sucesso.jpg" alt="Escola de sucesso" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>
+      </div>
+      <div class="gallery-caption reveal">
+        <p>Transformar uma escola começa <span>transformando as pessoas</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta section-pad">
+    <div class="cta-bg-image">
+      <img src="./assets/images/escola-sucesso.jpg" alt="Escola de sucesso" loading="lazy" onerror="this.style.display='none'">
+      <div class="cta-overlay"></div>
+    </div>
+    <div class="cta-glow"></div>
+    <div class="container">
+      <div class="cta-card reveal">
+        <h2>Sua escola está pronta para descobrir seu <span class="text-gold">verdadeiro potencial?</span></h2>
+        <p>Faça gratuitamente o Radar FI® e descubra oportunidades para fortalecer sua equipe, aumentar a retenção e transformar a experiência dos seus alunos.</p>
+        <div class="cta-buttons">
+          <a href="./radar.html" class="btn btn-gold">
+            Quero descobrir meu Índice FI®
+            <i data-lucide="arrow-right"></i>
+          </a>
+          <a href="https://wa.me/5531984706404?text=Ol%C3%A1%2C%20Prof.%20Weverson!%20Vi%20o%20site%20do%20M%C3%A9todo%20FI%C2%AE%20e%20gostaria%20de%20agendar%20o%20Diagn%C3%B3stico%20Gratuito%20da%20minha%20escola." target="_blank" class="btn btn-wa">
+            <i data-lucide="message-circle"></i> Conversar pelo WhatsApp
+          </a>
+        </div>
+        <p class="cta-disclaimer">100% Gratuito • Sem compromisso</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content reveal">
+        <div class="footer-brand">
+          <p class="footer-brand-name">Método FI®</p>
+          <p class="footer-brand-sub">Fidelização Inteligente®</p>
+          <p class="footer-brand-quote">"Transformando matrículas em vínculos duradouros."</p>
+        </div>
+        <div class="footer-socials">
+          <a href="https://instagram.com/weversonroch4" target="_blank" class="social-btn" title="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="https://wa.me/5531984706404?text=Ol%C3%A1%2C%20Prof.%20Weverson!%20Vi%20o%20site%20do%20M%C3%A9todo%20FI%C2%AE%20e%20gostaria%20de%20agendar%20o%20Diagn%C3%B3stico%20Gratuito%20da%20minha%20escola." target="_blank" class="social-btn" title="WhatsApp"><i data-lucide="message-circle"></i></a>
+          <a href="mailto:weversonrocha094@gmail.com" class="social-btn" title="E-mail"><i data-lucide="mail"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Método FI®. Todos os direitos reservados.</p>
+        <div class="footer-links">
+          <a href="#">Termos de Uso</a>
+          <a href="#">Política de Privacidade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    // Navbar scroll effect
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) { navbar.classList.add('scrolled'); }
+      else { navbar.classList.remove('scrolled'); }
+    });
+
+    // Reveal on scroll
+    var revealObserver = new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+    // Animated counters
+    function animateCounters() {
+      document.querySelectorAll('.stat-number').forEach(function(el) {
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var suffix = el.getAttribute('data-suffix') || '';
+        var current = 0;
+        var step = Math.max(1, Math.ceil(target / 45));
+        var timer = setInterval(function() {
+          current += step;
+          if (current >= target) { current = target; clearInterval(timer); }
+          el.textContent = current + suffix;
+        }, 28);
+      });
+    }
+    var statsSection = document.getElementById('stats');
+    var statsObserver = new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          animateCounters();
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    if (statsSection) { statsObserver.observe(statsSection); }
+  </script>
+</body>
+</html>
