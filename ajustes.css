@@ -1,0 +1,30 @@
+/* ===== AJUSTES (versão final) — hero com clima, pílula compacta, cabeças inteiras ===== */
+
+/* HERO: a foto vira textura (desfocada e escura), não "borrão de armário" */
+.hero{isolation:isolate}
+.hero-bg img{filter:blur(6px) brightness(.42) saturate(.65);opacity:.45;transform:scale(1.12)}
+.hero-overlay-1{background:linear-gradient(to right,var(--navy-950) 0%,rgba(5,13,26,.86) 42%,rgba(5,13,26,.5) 100%)}
+.hero-overlay-2{background:linear-gradient(to top,var(--navy-950) 2%,transparent 42%)}
+
+/* grade sutil + pontinhos dourados que derivam devagar = vida, sem depender de foto */
+.hero::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(circle at 78% 32%,#000,transparent 72%);mask-image:radial-gradient(circle at 78% 32%,#000,transparent 72%)}
+.hero::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background-image:radial-gradient(rgba(212,175,55,.16) 1px,transparent 1.6px);background-size:44px 44px;opacity:.55;
+  -webkit-mask-image:radial-gradient(circle at 72% 42%,#000,transparent 70%);mask-image:radial-gradient(circle at 72% 42%,#000,transparent 70%);
+  animation:herodrift 34s linear infinite}
+@keyframes herodrift{from{background-position:0 0}to{background-position:44px 88px}}
+.hero-glow{animation:heropulse 7s ease-in-out infinite alternate}
+@keyframes heropulse{from{opacity:.7;transform:scale(1)}to{opacity:1;transform:scale(1.08)}}
+
+/* PÍLULA do badge volta a ser compacta (não barra larga) */
+.hero-badge{align-items:flex-start}
+
+/* BENEFÍCIOS: ancora pelo topo pra não cortar a cabeça das pessoas */
+.benefit-image{min-height:300px}
+.benefit-image img{object-position:center top}
+
+/* (seguro) se a foto do problema voltar um dia, mostra a parte de baixo */
+.problem-image img{object-position:center bottom}
