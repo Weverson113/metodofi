@@ -65,3 +65,8 @@
     animation:heropulse 8s ease-in-out infinite alternate}
   @keyframes heropulse{from{opacity:.5;transform:scale(1)}to{opacity:.9;transform:scale(1.06)}}
 }
+/* ===== pílula dos botões: texto nunca quebra (emenda do hero) ===== */
+@media(min-width:1024px){
+  .hero-buttons{flex-wrap:wrap;gap:14px}
+  .hero-buttons .btn{white-space:nowrap;flex:0 0 auto;padding-left:26px;padding-right:26px}
+}
