@@ -1,32 +1,33 @@
-/* ===== AJUSTES v4 — hero = campo de cor + luz de canto (SEM foto, SEM grade, SEM mancha) ===== */
+/* ===== AJUSTES v5 — hero SPLIT: texto à esquerda + seu retrato à direita ===== */
 
 .hero{isolation:isolate}
 
-/* a foto vira grão quase nulo — o armário claro some de vez */
-.hero-bg img{filter:blur(14px) brightness(.16) saturate(.25);opacity:.10;transform:scale(1.2)}
-
-/* escurece a esquerda (texto) E segura a direita pra foto não vazar clara */
-.hero-overlay-1{background:linear-gradient(to right,var(--navy-950) 0%,rgba(5,13,26,.92) 38%,rgba(5,13,26,.72) 70%,rgba(5,13,26,.84) 100%)}
-.hero-overlay-2{background:linear-gradient(to top,var(--navy-950) 0%,transparent 36%)}
-
-/* CLIMA: luz dourada DIRECIONAL no canto superior direito (sutil) + vinheta nas bordas. Sem blob no meio. */
-.hero::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:
-    radial-gradient(72% 92% at 100% 0%, rgba(212,175,55,.11) 0%, rgba(212,175,55,.03) 34%, transparent 60%),
-    radial-gradient(125% 125% at 50% 50%, transparent 46%, rgba(5,13,26,.72) 100%)}
-
-/* o sopro dourado fica no canto e respira devagar — não pinta o centro */
-.hero-glow{top:-14%;right:-6%;left:auto;width:520px;height:520px;
-  background:radial-gradient(circle, rgba(212,175,55,.13) 0%, rgba(212,175,55,.04) 44%, transparent 68%);
-  filter:blur(42px);animation:heropulse 8s ease-in-out infinite alternate}
-@keyframes heropulse{from{opacity:.5;transform:scale(1)}to{opacity:.85;transform:scale(1.06)}}
-
-/* PÍLULA do badge compacta */
+/* MOBILE: a foto fica atrás, inteira na vertical (faixa estreita = aparece bem) */
+.hero-bg img{filter:blur(2px) brightness(.5) saturate(.72);opacity:.36;transform:scale(1.06);object-position:center top}
+.hero-overlay-1{background:linear-gradient(to right,var(--navy-950) 0%,rgba(5,13,26,.82) 55%,rgba(5,13,26,.5) 100%)}
+.hero-overlay-2{background:linear-gradient(to top,var(--navy-950) 0%,transparent 30%,rgba(5,13,26,.35) 100%)}
+.hero-glow{top:6%;right:2%;left:auto;width:300px;height:300px;background:radial-gradient(circle,rgba(212,175,55,.16) 0%,transparent 68%);filter:blur(36px)}
 .hero-badge{align-items:flex-start}
 
 /* BENEFÍCIOS: ancora pelo topo pra não cortar a cabeça */
 .benefit-image{min-height:300px}
 .benefit-image img{object-position:center top}
-
 /* (seguro) foto do problema mostra a parte de baixo */
 .problem-image img{object-position:center bottom}
+
+/* DESKTOP: vira SPLIT — foto só na metade direita, texto na esquerda */
+@media(min-width:1024px){
+  .hero-bg{left:50%}                                   /* foto ocupa só da metade pra direita */
+  .hero-bg img{filter:brightness(.84) saturate(.96) contrast(1.03);opacity:1;object-position:center top;transform:scale(1.03);animation:heroken 24s ease-in-out infinite alternate}
+  @keyframes heroken{from{transform:scale(1.03)}to{transform:scale(1.1)}}   /* respira devagar */
+  .hero-overlay-1{background:linear-gradient(to right,var(--navy-950) 0%,rgba(5,13,26,.62) 8%,rgba(5,13,26,.1) 30%,rgba(5,13,26,.3) 100%)}  /* funde a junção + véu pra casar o tom */
+  .hero-overlay-2{background:linear-gradient(to top,var(--navy-950) 0%,transparent 22%,transparent 78%,rgba(5,13,26,.45) 100%)}           /* escurece topo e base da foto */
+  .hero-content{max-width:min(560px,46vw)}             /* texto não invade a foto */
+  .hero-title{font-size:clamp(2rem,3.6vw,3.5rem)}      /* título casa com a coluna estreita */
+  .hero-description{font-size:1.05rem}
+  /* linha dourada editorial na junção texto/foto */
+  .hero::after{content:'';position:absolute;left:50%;top:12%;bottom:12%;width:1px;transform:translateX(-50%);background:linear-gradient(to bottom,transparent,rgba(212,175,55,.45) 28%,rgba(212,175,55,.45) 72%,transparent);z-index:3;pointer-events:none}
+  /* sopro dourado atrás da foto, sutil */
+  .hero-glow{top:8%;right:6%;left:auto;width:460px;height:460px;background:radial-gradient(circle,rgba(212,175,55,.16) 0%,transparent 68%);filter:blur(40px);animation:heropulse 8s ease-in-out infinite alternate}
+  @keyframes heropulse{from{opacity:.5}to{opacity:.9}}
+}
