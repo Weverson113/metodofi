@@ -1,25 +1,25 @@
-/* ===== AJUSTES v3 — hero sem grade (clima cinematográfico) + cabeças inteiras ===== */
+/* ===== AJUSTES v4 — hero = campo de cor + luz de canto (SEM foto, SEM grade, SEM mancha) ===== */
 
-/* HERO base */
 .hero{isolation:isolate}
 
-/* a foto vira só um grão de ambiente (sem borrão de armário) */
-.hero-bg img{filter:blur(10px) brightness(.28) saturate(.45);opacity:.32;transform:scale(1.18)}
+/* a foto vira grão quase nulo — o armário claro some de vez */
+.hero-bg img{filter:blur(14px) brightness(.16) saturate(.25);opacity:.10;transform:scale(1.2)}
 
-/* escurece pra o texto da esquerda respirar */
-.hero-overlay-1{background:linear-gradient(to right,var(--navy-950) 0%,rgba(5,13,26,.9) 40%,rgba(5,13,26,.55) 78%,rgba(5,13,26,.72) 100%)}
-.hero-overlay-2{background:linear-gradient(to top,var(--navy-950) 0%,transparent 38%)}
+/* escurece a esquerda (texto) E segura a direita pra foto não vazar clara */
+.hero-overlay-1{background:linear-gradient(to right,var(--navy-950) 0%,rgba(5,13,26,.92) 38%,rgba(5,13,26,.72) 70%,rgba(5,13,26,.84) 100%)}
+.hero-overlay-2{background:linear-gradient(to top,var(--navy-950) 0%,transparent 36%)}
 
-/* CLIMA: halo dourado à direita + brilho baixo + vinheta nas bordas. SEM grade, SEM pontinhos. */
+/* CLIMA: luz dourada DIRECIONAL no canto superior direito (sutil) + vinheta nas bordas. Sem blob no meio. */
 .hero::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
   background:
-    radial-gradient(60% 72% at 82% 36%, rgba(212,175,55,.22) 0%, rgba(212,175,55,.07) 40%, transparent 68%),
-    radial-gradient(48% 60% at 94% 90%, rgba(202,138,4,.16) 0%, transparent 62%),
-    radial-gradient(125% 125% at 50% 48%, transparent 52%, rgba(5,13,26,.6) 100%)}
+    radial-gradient(72% 92% at 100% 0%, rgba(212,175,55,.11) 0%, rgba(212,175,55,.03) 34%, transparent 60%),
+    radial-gradient(125% 125% at 50% 50%, transparent 46%, rgba(5,13,26,.72) 100%)}
 
-/* o halo dourado pulsa devagar (vida) */
-.hero-glow{background:radial-gradient(circle, rgba(212,175,55,.24) 0%, rgba(212,175,55,.09) 42%, transparent 70%);filter:blur(34px);animation:heropulse 7s ease-in-out infinite alternate}
-@keyframes heropulse{from{opacity:.6;transform:scale(1) translate(0,0)}to{opacity:1;transform:scale(1.1) translate(-2%,3%)}}
+/* o sopro dourado fica no canto e respira devagar — não pinta o centro */
+.hero-glow{top:-14%;right:-6%;left:auto;width:520px;height:520px;
+  background:radial-gradient(circle, rgba(212,175,55,.13) 0%, rgba(212,175,55,.04) 44%, transparent 68%);
+  filter:blur(42px);animation:heropulse 8s ease-in-out infinite alternate}
+@keyframes heropulse{from{opacity:.5;transform:scale(1)}to{opacity:.85;transform:scale(1.06)}}
 
 /* PÍLULA do badge compacta */
 .hero-badge{align-items:flex-start}
