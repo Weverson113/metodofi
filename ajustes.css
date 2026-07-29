@@ -1,4 +1,4 @@
-/* ===== AJUSTES v7 — o v5 que você gostou, SEM costura: emenda derretida + texto contido + braços inteiros ===== */
+/* ===== AJUSTES v8 — foto NÍTIDA à direita, emenda por MÁSCARA (sem véu escuro = sem barra) ===== */
 
 .hero{isolation:isolate}
 
@@ -15,25 +15,31 @@
 /* (seguro) foto do problema mostra a parte de baixo */
 .problem-image img{object-position:center bottom}
 
-/* DESKTOP: split limpo */
+/* DESKTOP: split limpo, emenda por máscara */
 @media(min-width:1024px){
 
-  /* TEXTO contido à esquerda — não encosta mais na foto */
-  .hero-content{max-width:min(520px,44vw);margin:0;padding-left:clamp(20px,4vw,72px);padding-right:24px}
+  /* TEXTO firme à esquerda, sobre marinho puro — não encosta na foto */
+  .hero-content{max-width:min(600px,46vw);margin:0;padding-left:clamp(24px,5vw,96px);padding-right:24px}
   .hero-title{font-size:clamp(2rem,3.2vw,3.1rem)}
   .hero-description{font-size:1.06rem}
 
-  /* FOTO na metade direita, nítida, braços abertos inteiros (painel largo = não corta os braços), zoom lento */
-  .hero-bg{left:50%;box-shadow:none}
-  .hero-bg img{filter:brightness(.92) saturate(1) contrast(1.04);opacity:1;object-position:center top;transform:scale(1.04);animation:heroken 24s ease-in-out infinite alternate}
+  /* PAINEL da foto só na direita, colado na borda, SEM sombra (sombra foi a barra do v6) */
+  .hero-bg{left:52%;right:0;top:0;bottom:0;box-shadow:none}
+
+  /* FOTO nítida; a BORDA ESQUERDA some por máscara (derrete pro marinho) → emenda sem véu escuro */
+  .hero-bg img{
+    filter:brightness(.96) saturate(1) contrast(1.04);opacity:1;
+    object-position:center top;transform:scale(1.04);
+    animation:heroken 24s ease-in-out infinite alternate;
+    -webkit-mask-image:linear-gradient(to right, transparent 0%, #000 16%);
+    mask-image:linear-gradient(to right, transparent 0%, #000 16%)}
   @keyframes heroken{from{transform:scale(1.04)}to{transform:scale(1.11)}}
 
-  /* EMENDA = degradê que derrete (marinho some DENTRO da foto) → NENHUMA barra, NENHUMA linha */
-  .hero-overlay-1{background:linear-gradient(to right,var(--navy-950) 0%,var(--navy-950) 32%,rgba(5,13,26,.92) 42%,rgba(5,13,26,.5) 52%,rgba(5,13,26,.14) 62%,rgba(5,13,26,0) 72%)}
-  /* escurece só topo (navbar) e base (scroll) da foto */
-  .hero-overlay-2{background:linear-gradient(to top,var(--navy-950) 0%,rgba(5,13,26,0) 18%,rgba(5,13,26,0) 82%,rgba(5,13,26,.5) 100%)}
+  /* NENHUM véu escuro horizontal (era ele a barra). Só escurece TOPO (navbar) e BASE (scroll). */
+  .hero-overlay-1{background:none}
+  .hero-overlay-2{background:linear-gradient(to bottom, rgba(5,13,26,.78) 0%, rgba(5,13,26,0) 15%, rgba(5,13,26,0) 85%, rgba(5,13,26,.55) 100%)}
 
-  /* halo dourado discreto atrás da foto, pulsando devagar */
-  .hero-glow{top:10%;right:8%;left:auto;width:420px;height:420px;background:radial-gradient(circle,rgba(212,175,55,.14) 0%,transparent 68%);filter:blur(40px);animation:heropulse 8s ease-in-out infinite alternate}
+  /* halo dourado discreto no canto, pulsando — não cobre o rosto */
+  .hero-glow{top:8%;right:6%;left:auto;width:420px;height:420px;background:radial-gradient(circle,rgba(212,175,55,.14) 0%,transparent 68%);filter:blur(40px);animation:heropulse 8s ease-in-out infinite alternate}
   @keyframes heropulse{from{opacity:.5;transform:scale(1)}to{opacity:.85;transform:scale(1.06)}}
 }
