@@ -1,30 +1,32 @@
-/* ===== AJUSTES (versão final) — hero com clima, pílula compacta, cabeças inteiras ===== */
+/* ===== AJUSTES v3 — hero sem grade (clima cinematográfico) + cabeças inteiras ===== */
 
-/* HERO: a foto vira textura (desfocada e escura), não "borrão de armário" */
+/* HERO base */
 .hero{isolation:isolate}
-.hero-bg img{filter:blur(6px) brightness(.42) saturate(.65);opacity:.45;transform:scale(1.12)}
-.hero-overlay-1{background:linear-gradient(to right,var(--navy-950) 0%,rgba(5,13,26,.86) 42%,rgba(5,13,26,.5) 100%)}
-.hero-overlay-2{background:linear-gradient(to top,var(--navy-950) 2%,transparent 42%)}
 
-/* grade sutil + pontinhos dourados que derivam devagar = vida, sem depender de foto */
+/* a foto vira só um grão de ambiente (sem borrão de armário) */
+.hero-bg img{filter:blur(10px) brightness(.28) saturate(.45);opacity:.32;transform:scale(1.18)}
+
+/* escurece pra o texto da esquerda respirar */
+.hero-overlay-1{background:linear-gradient(to right,var(--navy-950) 0%,rgba(5,13,26,.9) 40%,rgba(5,13,26,.55) 78%,rgba(5,13,26,.72) 100%)}
+.hero-overlay-2{background:linear-gradient(to top,var(--navy-950) 0%,transparent 38%)}
+
+/* CLIMA: halo dourado à direita + brilho baixo + vinheta nas bordas. SEM grade, SEM pontinhos. */
 .hero::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
-  background-size:64px 64px;
-  -webkit-mask-image:radial-gradient(circle at 78% 32%,#000,transparent 72%);mask-image:radial-gradient(circle at 78% 32%,#000,transparent 72%)}
-.hero::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
-  background-image:radial-gradient(rgba(212,175,55,.16) 1px,transparent 1.6px);background-size:44px 44px;opacity:.55;
-  -webkit-mask-image:radial-gradient(circle at 72% 42%,#000,transparent 70%);mask-image:radial-gradient(circle at 72% 42%,#000,transparent 70%);
-  animation:herodrift 34s linear infinite}
-@keyframes herodrift{from{background-position:0 0}to{background-position:44px 88px}}
-.hero-glow{animation:heropulse 7s ease-in-out infinite alternate}
-@keyframes heropulse{from{opacity:.7;transform:scale(1)}to{opacity:1;transform:scale(1.08)}}
+  background:
+    radial-gradient(60% 72% at 82% 36%, rgba(212,175,55,.22) 0%, rgba(212,175,55,.07) 40%, transparent 68%),
+    radial-gradient(48% 60% at 94% 90%, rgba(202,138,4,.16) 0%, transparent 62%),
+    radial-gradient(125% 125% at 50% 48%, transparent 52%, rgba(5,13,26,.6) 100%)}
 
-/* PÍLULA do badge volta a ser compacta (não barra larga) */
+/* o halo dourado pulsa devagar (vida) */
+.hero-glow{background:radial-gradient(circle, rgba(212,175,55,.24) 0%, rgba(212,175,55,.09) 42%, transparent 70%);filter:blur(34px);animation:heropulse 7s ease-in-out infinite alternate}
+@keyframes heropulse{from{opacity:.6;transform:scale(1) translate(0,0)}to{opacity:1;transform:scale(1.1) translate(-2%,3%)}}
+
+/* PÍLULA do badge compacta */
 .hero-badge{align-items:flex-start}
 
-/* BENEFÍCIOS: ancora pelo topo pra não cortar a cabeça das pessoas */
+/* BENEFÍCIOS: ancora pelo topo pra não cortar a cabeça */
 .benefit-image{min-height:300px}
 .benefit-image img{object-position:center top}
 
-/* (seguro) se a foto do problema voltar um dia, mostra a parte de baixo */
+/* (seguro) foto do problema mostra a parte de baixo */
 .problem-image img{object-position:center bottom}
