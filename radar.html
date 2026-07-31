@@ -41,7 +41,7 @@
       min-height: 100vh;
     }
 
-    .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+    .container { max-width: 950px; margin: 0 auto; padding: 40px 24px; }
 
     .radar-header { text-align: center; margin-bottom: 48px; }
     .radar-logo {
@@ -180,6 +180,13 @@
       transition: color 0.5s ease;
     }
     .score-value small { display: block; font-size: 0.875rem; font-weight: 500; color: var(--color-neutral-400); margin-top: 4px; }
+    .score-value.glow {
+      animation: scoreGlow 2s ease-in-out infinite;
+    }
+    @keyframes scoreGlow {
+      0%, 100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+      50% { text-shadow: 0 0 40px rgba(212, 175, 55, 0.6), 0 0 60px rgba(212, 175, 55, 0.4); }
+    }
 
     .score-badge {
       display: inline-flex; align-items: center; gap: 8px;
@@ -203,34 +210,99 @@
     .market-stat .num { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; line-height: 1; }
     .market-stat .lbl { font-size: 0.75rem; color: var(--color-neutral-400); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
 
+    /* DIAGNÓSTICO ESTRATÉGICO - NOVO FORMATO */
     .exec-summary {
-      background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-      border-left: 4px solid var(--color-gold-500); border-radius: 16px;
-      padding: 28px 32px; margin-bottom: 40px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 4px solid var(--color-gold-500);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 40px;
     }
     .exec-summary .exec-label {
-      font-family: var(--font-heading); font-size: 0.8rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-gold-400); margin-bottom: 12px;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gold-400);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .exec-summary p { font-size: 1.05rem; color: var(--color-neutral-300); line-height: 1.7; }
+    .exec-summary .exec-label svg { width: 20px; height: 20px; }
+    .exec-section { margin-bottom: 20px; }
+    .exec-section:last-child { margin-bottom: 0; }
+    .exec-section h4 {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-neutral-200);
+      margin-bottom: 10px;
+    }
+    .exec-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px 0;
+    }
+    .exec-section li {
+      padding: 4px 0;
+      font-size: 0.95rem;
+      color: var(--color-neutral-300);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .exec-section li::before {
+      content: '•';
+      color: var(--color-gold-500);
+      font-weight: 700;
+      margin-right: 4px;
+    }
+    .exec-section p {
+      font-size: 1rem;
+      color: var(--color-neutral-300);
+      line-height: 1.6;
+      font-style: italic;
+    }
 
     .charts-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
     @media(min-width: 768px) { .charts-grid { grid-template-columns: 1fr 1fr; } }
     .chart-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; }
     .chart-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; color: #fff; text-align: center; }
+    
+    .radar-intro-text {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--color-neutral-400);
+      margin-bottom: 24px;
+      line-height: 1.6;
+      font-style: italic;
+    }
 
     .maturity-legend {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px;
+      display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 24px;
     }
-    @media(min-width: 768px) { .maturity-legend { grid-template-columns: 1fr; } }
-    .legend-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--color-neutral-300); }
-    .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .legend-item { 
+      display: flex; 
+      align-items: flex-start; 
+      gap: 12px; 
+      font-size: 0.85rem; 
+      color: var(--color-neutral-300);
+      padding: 8px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+    }
+    .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
     .legend-dot.green { background: #22c55e; }
     .legend-dot.yellow { background: #eab308; }
     .legend-dot.orange { background: #f97316; }
     .legend-dot.red { background: #ef4444; }
+    .legend-content strong { display: block; color: var(--color-neutral-200); margin-bottom: 2px; }
+    .legend-content span { display: block; font-size: 0.8rem; color: var(--color-neutral-400); }
 
-    .pillar-ranking { display: flex; flex-direction: column; gap: 16px; }
+    .pillar-ranking { display: flex; flex-direction: column; gap: 12px; }
     .pillar-row { display: grid; grid-template-columns: 110px 1fr 44px; align-items: center; gap: 12px; }
     .pillar-name { font-size: 0.8rem; color: var(--color-neutral-400); text-align: right; line-height: 1.2; }
     .pillar-track { background: rgba(255, 255, 255, 0.08); border-radius: 9999px; height: 10px; overflow: hidden; }
@@ -250,52 +322,52 @@
     .swot-col.opportunities .swot-item svg { color: #eab308; }
     .swot-empty { font-size: 0.9rem; color: var(--color-neutral-300); font-style: italic; line-height: 1.5; }
 
+    /* PLANO ESTRATÉGICO - NOVO FORMATO */
     .implantation-plan { 
       background: rgba(212, 175, 55, 0.05); 
       border: 1px solid rgba(212, 175, 55, 0.2); 
       border-radius: 16px; 
-      padding: 24px; 
-      margin-top: 24px;
+      padding: 24px;
     }
-    .implantation-plan h4 {
+    .plan-phase { margin-bottom: 24px; }
+    .plan-phase:last-child { margin-bottom: 0; }
+    .plan-phase h5 {
       font-family: var(--font-heading);
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      color: var(--color-gold-400);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .plan-section { margin-bottom: 20px; }
-    .plan-section:last-child { margin-bottom: 0; }
-    .plan-section h5 {
-      font-family: var(--font-heading);
-      font-size: 0.9rem;
-      font-weight: 600;
       color: var(--color-neutral-200);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    .plan-section ul {
+    .plan-phase h5 svg { width: 18px; height: 18px; }
+    .plan-phase ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
-    .plan-section li {
-      padding: 6px 0;
-      font-size: 0.9rem;
+    .plan-phase li {
+      padding: 8px 0;
+      font-size: 0.95rem;
       color: var(--color-neutral-300);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .plan-section li::before {
+    .plan-phase li:last-child { border-bottom: none; }
+    .plan-phase li::before {
       content: '→';
       color: var(--color-gold-500);
       font-weight: 700;
+    }
+    .plan-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+      margin: 20px 0;
     }
     .plan-footer {
       margin-top: 20px;
@@ -357,6 +429,27 @@
 
     .report-footer { text-align: center; margin-top: 36px; font-size: 0.8rem; color: var(--color-neutral-500); letter-spacing: 0.03em; line-height: 1.6; }
     .report-footer .rf-brand { color: var(--color-gold-500); font-weight: 600; }
+
+    /* FRASE FINAL DE POSICIONAMENTO */
+    .positioning-quote {
+      background: rgba(212, 175, 55, 0.08);
+      border-left: 4px solid var(--color-gold-500);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 40px 0;
+      text-align: center;
+    }
+    .positioning-quote p {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-neutral-200);
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .positioning-quote p strong {
+      color: var(--color-gold-400);
+    }
 
     .hidden { display: none !important; }
 
@@ -435,20 +528,45 @@
       </div>
 
       <div class="exec-summary">
-        <div class="exec-label">Diagnóstico Estratégico</div>
-        <p id="execText"></p>
+        <div class="exec-label"><i data-lucide="bar-chart-2"></i> DIAGNÓSTICO ESTRATÉGICO</div>
+        <div id="execContent"></div>
       </div>
 
       <div class="charts-grid">
         <div class="chart-card">
           <h3 class="chart-title">Mapa dos Pilares</h3>
+          <p class="radar-intro-text">A fidelização não depende de um único setor. Ela é construída pelo equilíbrio entre os sete pilares do Método FI®.</p>
           <canvas id="radarChart"></canvas>
           
           <div class="maturity-legend">
-            <div class="legend-item"><div class="legend-dot green"></div> <strong>85–100 | Referência:</strong> Nível de excelência. Servirá de modelo.</div>
-            <div class="legend-item"><div class="legend-dot yellow"></div> <strong>70–84 | Consolidado:</strong> Base sólida, com espaço para elevar o padrão.</div>
-            <div class="legend-item"><div class="legend-dot orange"></div> <strong>50–69 | Em Desenvolvimento:</strong> Funciona parcialmente, precisa de padronização.</div>
-            <div class="legend-item"><div class="legend-dot red"></div> <strong>0–49 | Prioridade Estratégica:</strong> Merece atenção imediata para reduzir riscos.</div>
+            <div class="legend-item">
+              <div class="legend-dot green"></div>
+              <div class="legend-content">
+                <strong>Referência | 85–100</strong>
+                <span>Processo maduro e consistente.</span>
+              </div>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot yellow"></div>
+              <div class="legend-content">
+                <strong>Consolidado | 70–84</strong>
+                <span>Base sólida, com espaço para elevar o padrão.</span>
+              </div>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot orange"></div>
+              <div class="legend-content">
+                <strong>Em Desenvolvimento | 50–69</strong>
+                <span>Funciona parcialmente; precisa de padronização.</span>
+              </div>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot red"></div>
+              <div class="legend-content">
+                <strong>Prioridade Estratégica | 0–49</strong>
+                <span>Merece atenção imediata para reduzir riscos.</span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="chart-card">
@@ -459,7 +577,7 @@
 
       <div class="swot-grid">
         <div class="swot-col strengths">
-          <h3><i data-lucide="shield-check"></i> Base para Excelência</h3>
+          <h3><i data-lucide="trophy"></i> Base para Excelência</h3>
           <div id="strengthsList"></div>
         </div>
         <div class="swot-col opportunities">
@@ -477,6 +595,11 @@
         <h3>Primeiras Recomendações</h3>
         <p class="rec-sub">Ações práticas para começar a virar esse jogo</p>
         <div id="recommendationsList"></div>
+      </div>
+
+      <!-- FRASE FINAL DE POSICIONAMENTO -->
+      <div class="positioning-quote">
+        <p>"Escolas que crescem apenas em matrículas vivem apagando incêndios. Escolas que crescem em fidelização constroem <strong>resultados previsíveis</strong>, <strong>equipes alinhadas</strong> e <strong>alunos que permanecem</strong>."</p>
       </div>
 
       <div class="cta-box">
@@ -737,6 +860,11 @@
 
       document.getElementById('scoreLabel').textContent = level.phrase;
 
+      // Adicionar efeito de brilho no score
+      setTimeout(() => {
+        document.getElementById('scoreValue').classList.add('glow');
+      }, 500);
+
       buildExecSummary(level);
       animateScore(totalScore);
       createCharts(level);
@@ -756,17 +884,25 @@
       }).sort(function(a, b) { return a.score - b.score; });
 
       const critical = sorted.filter(function(p) { return p.score < 50; }).map(function(p) { return p.name; });
+      const others = sorted.filter(function(p) { return p.score >= 50; }).map(function(p) { return p.name; });
       
-      let execText = '';
-      if (critical.length >= 2) {
-        execText = 'Os pilares de ' + critical.slice(0, -1).join(', ') + ' e ' + critical[critical.length - 1] + ' serão tratados como prioridade nas primeiras etapas da implantação. Os demais pilares também fazem parte do plano estratégico de evolução e serão fortalecidos para elevar o padrão de experiência, retenção e fidelização da escola.';
-      } else if (critical.length === 1) {
-        execText = 'O pilar de ' + critical[0] + ' será tratado como prioridade nas primeiras etapas da implantação. Os demais pilares também fazem parte do plano estratégico de evolução e serão fortalecidos para elevar o padrão de experiência, retenção e fidelização da escola.';
-      } else {
-        execText = 'Sua escola apresenta uma base sólida. O Método FI® atuará para elevar todos os pilares ao padrão de excelência, garantindo uma cultura consistente de fidelização.';
+      let execHTML = '';
+      
+      if (critical.length > 0) {
+        execHTML += '<div class="exec-section"><h4>Prioridades imediatas</h4><ul>';
+        execHTML += critical.map(p => '<li>' + p + '</li>').join('');
+        execHTML += '</ul></div>';
       }
+      
+      if (others.length > 0) {
+        execHTML += '<div class="exec-section"><h4>Plano de evolução</h4><ul>';
+        execHTML += others.map(p => '<li>' + p + '</li>').join('');
+        execHTML += '</ul></div>';
+      }
+      
+      execHTML += '<div class="exec-section"><p>Sua escola possui uma base importante, porém ainda não conta com processos padronizados de fidelização. A implantação do Método FI® atuará primeiro nos pilares críticos e, em seguida, fortalecerá toda a jornada do aluno.</p></div>';
 
-      document.getElementById('execText').textContent = execText;
+      document.getElementById('execContent').innerHTML = execHTML;
     }
 
     function animateScore(finalScore) {
@@ -825,19 +961,21 @@
             borderColor: '#d4af37',
             pointBackgroundColor: '#d4af37',
             pointBorderColor: '#fff',
+            pointRadius: 4,
           }]
         },
         options: {
           scales: {
             r: {
               beginAtZero: true, max: 100,
-              ticks: { color: 'rgba(255,255,255,0.6)', backdropColor: 'transparent' },
+              ticks: { color: 'rgba(255,255,255,0.6)', backdropColor: 'transparent', stepSize: 20 },
               grid: { color: 'rgba(255,255,255,0.1)' },
               angleLines: { color: 'rgba(255,255,255,0.1)' },
-              pointLabels: { color: '#fff', font: { size: 11 } }
+              pointLabels: { color: '#fff', font: { size: 12, weight: '600' } }
             }
           },
-          plugins: { legend: { display: false } }
+          plugins: { legend: { display: false } },
+          maintainAspectRatio: true
         }
       });
     }
@@ -893,22 +1031,23 @@
 
       const sList = document.getElementById('strengthsList');
       if (strengths.length === 0) {
-        sList.innerHTML = '<div class="swot-empty">Esses pilares já apresentam uma boa estrutura e servirão como base para elevar ainda mais a experiência da escola. Durante a implantação do Método FI®, eles também serão aperfeiçoados para alcançar um padrão de excelência.</div>';
+        sList.innerHTML = '<div class="swot-empty">Nenhum dos pilares atingiu o nível considerado referência pelo Método FI®. Durante a implantação, nosso objetivo será transformar os pilares consolidados em verdadeiros diferenciais competitivos da escola.</div>';
       } else {
-        sList.innerHTML = strengths.map(n => '<div class="swot-item"><i data-lucide="check-circle-2"></i> ' + n + '</div>').join('');
+        sList.innerHTML = strengths.map(n => '<div class="swot-item"><i data-lucide="check-circle"></i> ' + n + '</div>').join('');
       }
 
       const planDiv = document.getElementById('implantationPlan');
       let planHTML = '<div class="implantation-plan">';
       
       if (critical.length > 0) {
-        planHTML += '<div class="plan-section"><h5><i data-lucide="alert-circle" style="color:#ef4444"></i> Prioridade Imediata</h5><ul>';
+        planHTML += '<div class="plan-phase"><h5><i data-lucide="alert-circle" style="color:#ef4444"></i> FASE 1 - Prioridades imediatas</h5><ul>';
         planHTML += critical.map(p => '<li>' + p + '</li>').join('');
         planHTML += '</ul></div>';
       }
       
       if (others.length > 0) {
-        planHTML += '<div class="plan-section"><h5><i data-lucide="trending-up" style="color:#eab308"></i> Também serão fortalecidos</h5><ul>';
+        planHTML += '<div class="plan-divider"></div>';
+        planHTML += '<div class="plan-phase"><h5><i data-lucide="trending-up" style="color:#eab308"></i> FASE 2 - Consolidação</h5><ul>';
         planHTML += others.map(p => '<li>' + p + '</li>').join('');
         planHTML += '</ul></div>';
       }
