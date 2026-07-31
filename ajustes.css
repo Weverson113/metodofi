@@ -70,6 +70,12 @@
   .hero-buttons{flex-wrap:wrap;gap:14px}
   .hero-buttons .btn{white-space:nowrap;flex:0 0 auto;padding-left:26px;padding-right:26px}
 }
+/* Jornada do Aluno - ajuste mobile: ícone não sobe */
+@media(max-width:767px){
+  .journey-step{padding-top:24px}
+  .journey-icon{margin:0 auto 16px}
+  .journey-step:first-child{margin-top:0}
+}
 
 /* =========================================================================
    v11 — ACABAMENTOS (tudo que faltava, numa peça só; o v10 acima segue intacto)
