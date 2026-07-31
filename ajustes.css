@@ -96,6 +96,17 @@
     margin-bottom:12px !important;
   }
 }
+  /* Ajuste do corte das fotos dos benefícios no PC */
+@media(min-width:768px){
+  /* 2ª foto - equipe: desce o corte pra mostrar as pessoas */
+  .benefits-grid > :nth-child(4) img{object-position:center bottom}
+  
+  /* 4ª foto - processos: desce o corte pra mostrar os post-its */
+  .benefits-grid > :nth-child(8) img{object-position:center bottom}
+  
+  /* 5ª foto - integração: centraliza o globo */
+  .benefits-grid > :nth-child(10) img{object-position:center center}
+}
 
 /* =========================================================================
    v11 — ACABAMENTOS (tudo que faltava, numa peça só; o v10 acima segue intacto)
