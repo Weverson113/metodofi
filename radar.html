@@ -773,7 +773,7 @@
 
       const sList = document.getElementById('strengthsList');
       if (strengths.length === 0) {
-        sList.innerHTML = '<div class="swot-empty">Ainda não há pilares consolidados como pontos fortes — e esse é exatamente o espaço que o Método FI® vem ocupar.</div>';
+        sList.innerHTML = '<div class="swot-empty">Consideramos <strong>ponto forte</strong> qualquer pilar acima de <strong>70% de maturidade</strong>. Nenhum dos seus atingiu esse patamar ainda — mas isso significa que há muito espaço para crescer, e é exatamente aí que o Método FI® atua primeiro.</div>';
       } else {
         sList.innerHTML = strengths.map(n => '<div class="swot-item"><i data-lucide="check-circle-2"></i> ' + n + '</div>').join('');
       }
