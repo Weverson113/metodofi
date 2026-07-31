@@ -70,11 +70,23 @@
   .hero-buttons{flex-wrap:wrap;gap:14px}
   .hero-buttons .btn{white-space:nowrap;flex:0 0 auto;padding-left:26px;padding-right:26px}
 }
-/* Jornada do Aluno - ajuste mobile: ícone não sobe */
+/* Jornada do Aluno - fix mobile: ícone dentro do card */
 @media(max-width:767px){
-  .journey-step{padding-top:24px}
-  .journey-icon{margin:0 auto 16px}
-  .journey-step:first-child{margin-top:0}
+  .journey-step{
+    padding:28px 20px 24px !important;
+    margin-bottom:20px !important;
+    position:relative !important;
+    overflow:hidden !important;
+  }
+  .journey-icon{
+    margin:0 auto 18px !important;
+    position:relative !important;
+    top:0 !important;
+    left:0 !important;
+  }
+  .journey-step h3{
+    margin-top:0 !important;
+  }
 }
 
 /* =========================================================================
