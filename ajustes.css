@@ -70,3 +70,11 @@
   .hero-buttons{flex-wrap:wrap;gap:14px}
   .hero-buttons .btn{white-space:nowrap;flex:0 0 auto;padding-left:26px;padding-right:26px}
 }
+
+/* =========================================================================
+   v11 — ACABAMENTOS (tudo que faltava, numa peça só; o v10 acima segue intacto)
+   ========================================================================= */
+
+/* 1) TÍTULO DOS BENEFÍCIOS: 2 linhas de branco + dourado na 3ª (sem órfã em nenhuma tela) */
+.benefits .section-title{font-size:clamp(1.6rem,4vw,2.7rem);text-wrap:balance}
+@media(min-width:1024px){
