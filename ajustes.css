@@ -107,6 +107,11 @@
   /* 5ª foto - integração: centraliza o globo */
   .benefits-grid > :nth-child(10) img{object-position:center center}
 }
+  /* Centralizar texto da barra de progresso */
+.progress-text {
+  margin-top: 0 !important;
+  padding-top: 8px !important;
+}
 
 /* =========================================================================
    v11 — ACABAMENTOS (tudo que faltava, numa peça só; o v10 acima segue intacto)
