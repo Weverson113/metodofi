@@ -219,7 +219,6 @@
     .chart-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; }
     .chart-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; color: #fff; text-align: center; }
 
-    /* LEGENDA DE MATURIDADE */
     .maturity-legend {
       display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px;
     }
@@ -250,6 +249,63 @@
     .swot-col.strengths .swot-item svg { color: #22c55e; }
     .swot-col.opportunities .swot-item svg { color: #eab308; }
     .swot-empty { font-size: 0.9rem; color: var(--color-neutral-300); font-style: italic; line-height: 1.5; }
+
+    .implantation-plan { 
+      background: rgba(212, 175, 55, 0.05); 
+      border: 1px solid rgba(212, 175, 55, 0.2); 
+      border-radius: 16px; 
+      padding: 24px; 
+      margin-top: 24px;
+    }
+    .implantation-plan h4 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-gold-400);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .plan-section { margin-bottom: 20px; }
+    .plan-section:last-child { margin-bottom: 0; }
+    .plan-section h5 {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-neutral-200);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .plan-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .plan-section li {
+      padding: 6px 0;
+      font-size: 0.9rem;
+      color: var(--color-neutral-300);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .plan-section li::before {
+      content: '→';
+      color: var(--color-gold-500);
+      font-weight: 700;
+    }
+    .plan-footer {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.85rem;
+      color: var(--color-neutral-400);
+      font-style: italic;
+      line-height: 1.5;
+    }
 
     .insights-list { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; margin-bottom: 40px; }
     .insights-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 24px; color: #fff; text-align: center; }
@@ -388,7 +444,6 @@
           <h3 class="chart-title">Mapa dos Pilares</h3>
           <canvas id="radarChart"></canvas>
           
-          <!-- LEGENDA DE MATURIDADE -->
           <div class="maturity-legend">
             <div class="legend-item"><div class="legend-dot green"></div> <strong>85–100 | Referência:</strong> Nível de excelência. Servirá de modelo.</div>
             <div class="legend-item"><div class="legend-dot yellow"></div> <strong>70–84 | Consolidado:</strong> Base sólida, com espaço para elevar o padrão.</div>
@@ -397,19 +452,19 @@
           </div>
         </div>
         <div class="chart-card">
-          <h3 class="chart-title">Ranking dos 7 Pilares</h3>
+          <h3 class="chart-title">Maturidade dos 7 Pilares FI®</h3>
           <div class="pillar-ranking" id="pillarRanking"></div>
         </div>
       </div>
 
       <div class="swot-grid">
         <div class="swot-col strengths">
-          <h3><i data-lucide="shield-check"></i> Pontos Fortes</h3>
+          <h3><i data-lucide="shield-check"></i> Base para Excelência</h3>
           <div id="strengthsList"></div>
         </div>
         <div class="swot-col opportunities">
-          <h3><i data-lucide="trending-up"></i> Oportunidades de Evolução</h3>
-          <div id="opportunitiesList"></div>
+          <h3><i data-lucide="target"></i> Plano Estratégico de Implantação FI®</h3>
+          <div id="implantationPlan"></div>
         </div>
       </div>
 
@@ -530,7 +585,6 @@
     let scoreChartInstance = null;
     let radarChartInstance = null;
 
-    // NOVA LÓGICA DE PONTUAÇÃO: MAPA DE EVOLUÇÃO
     function getLevel(score) {
       if (score >= 85) return { color: '#22c55e', label: 'REFERÊNCIA', icon: 'award', bg: 'rgba(34,197,94,0.15)', phrase: 'Seu processo demonstra elevado nível de maturidade. Durante a implantação, ele será refinado para servir de modelo aos demais pilares.' };
       if (score >= 70) return { color: '#eab308', label: 'CONSOLIDADO', icon: 'trending-up', bg: 'rgba(234,179,8,0.15)', phrase: 'Existe uma base consistente, porém ainda há espaço para elevar o padrão e gerar resultados ainda melhores.' };
@@ -701,26 +755,18 @@
         return { id: id, name: pillarNames[id], score: answers[id] ? answers[id].score : 0 };
       }).sort(function(a, b) { return a.score - b.score; });
 
-      const weak = sorted.filter(function(p) { return p.score < 85; }); // Ajustado para a nova lógica
-      let weakText = '';
-      if (weak.length >= 2) {
-        weakText = ' Os pilares que mais pedem atenção para alcançar a excelência são ' + weak[0].name + ' e ' + weak[1].name + ', e é exatamente neles que o Método FI® atua primeiro.';
-      } else if (weak.length === 1) {
-        weakText = ' O pilar que mais pede atenção para alcançar a excelência é ' + weak[0].name + ', e é exatamente nele que o Método FI® atua primeiro.';
-      }
-
-      let base = '';
-      if (totalScore >= 85) {
-        base = 'Com base nas respostas, sua escola apresenta uma estrutura de fidelização madura e consistente, com processos que sustentam a retenção e a experiência do aluno em alto nível.';
-      } else if (totalScore >= 70) {
-        base = 'Com base nas respostas, sua escola possui uma boa estrutura operacional, mas ainda existem oportunidades claras para padronizar a experiência do aluno e fortalecer a integração entre os setores.';
-      } else if (totalScore >= 50) {
-        base = 'Com base nas respostas, sua escola opera com esforço manual em pontos que deveriam ser processo. Isso gera experiências inconsistentes para o aluno e deixa a retenção vulnerável.';
+      const critical = sorted.filter(function(p) { return p.score < 50; }).map(function(p) { return p.name; });
+      
+      let execText = '';
+      if (critical.length >= 2) {
+        execText = 'Os pilares de ' + critical.slice(0, -1).join(', ') + ' e ' + critical[critical.length - 1] + ' serão tratados como prioridade nas primeiras etapas da implantação. Os demais pilares também fazem parte do plano estratégico de evolução e serão fortalecidos para elevar o padrão de experiência, retenção e fidelização da escola.';
+      } else if (critical.length === 1) {
+        execText = 'O pilar de ' + critical[0] + ' será tratado como prioridade nas primeiras etapas da implantação. Os demais pilares também fazem parte do plano estratégico de evolução e serão fortalecidos para elevar o padrão de experiência, retenção e fidelização da escola.';
       } else {
-        base = 'Com base nas respostas, sua escola ainda não conta com uma estrutura de fidelização definida. Isso faz com que a retenção dependa de esforço individual e não de método, o que explica a perda recorrente de alunos.';
+        execText = 'Sua escola apresenta uma base sólida. O Método FI® atuará para elevar todos os pilares ao padrão de excelência, garantindo uma cultura consistente de fidelização.';
       }
 
-      document.getElementById('execText').textContent = base + weakText + ' Esses fatores influenciam diretamente a retenção e a percepção de valor da sua instituição.';
+      document.getElementById('execText').textContent = execText;
     }
 
     function animateScore(finalScore) {
@@ -796,12 +842,11 @@
       });
     }
 
-    // NOVA LÓGICA DE CORES DOS PILARES
     function pillarColor(score) {
-      if (score >= 85) return '#22c55e'; // 🟢 Referência
-      if (score >= 70) return '#eab308'; // 🟡 Consolidado
-      if (score >= 50) return '#f97316'; // 🟠 Em Desenvolvimento
-      return '#ef4444'; // 🔴 Prioridade Estratégica
+      if (score >= 85) return '#22c55e';
+      if (score >= 70) return '#eab308';
+      if (score >= 50) return '#f97316';
+      return '#ef4444';
     }
 
     function renderPillarRanking() {
@@ -832,25 +877,48 @@
 
     function renderSwot() {
       const strengths = Object.keys(pillarNames)
-        .filter(id => (answers[id] ? answers[id].score : 0) >= 70) // Ajustado para >= 70 (Consolidado ou Referência)
+        .filter(id => (answers[id] ? answers[id].score : 0) >= 70)
         .map(id => pillarNames[id]);
-      const opportunities = Object.keys(pillarNames)
-        .filter(id => (answers[id] ? answers[id].score : 0) < 85) // Tudo que não é Referência é oportunidade de evolução
+      
+      const critical = Object.keys(pillarNames)
+        .filter(id => (answers[id] ? answers[id].score : 0) < 50)
+        .map(id => pillarNames[id]);
+      
+      const others = Object.keys(pillarNames)
+        .filter(id => {
+          const score = answers[id] ? answers[id].score : 0;
+          return score >= 50;
+        })
         .map(id => pillarNames[id]);
 
       const sList = document.getElementById('strengthsList');
       if (strengths.length === 0) {
-        sList.innerHTML = '<div class="swot-empty">No Método FI®, um ponto forte não é considerado um trabalho concluído. É considerado uma oportunidade para elevar ainda mais o padrão de excelência da escola.</div>';
+        sList.innerHTML = '<div class="swot-empty">Esses pilares já apresentam uma boa estrutura e servirão como base para elevar ainda mais a experiência da escola. Durante a implantação do Método FI®, eles também serão aperfeiçoados para alcançar um padrão de excelência.</div>';
       } else {
         sList.innerHTML = strengths.map(n => '<div class="swot-item"><i data-lucide="check-circle-2"></i> ' + n + '</div>').join('');
       }
 
-      const oList = document.getElementById('opportunitiesList');
-      if (opportunities.length === 0) {
-        oList.innerHTML = '<div class="swot-empty">Sua escola já atingiu o nível de Referência em todos os pilares. O próximo passo do Método FI® é manter esse padrão e torná-lo o modelo para outras instituições.</div>';
-      } else {
-        oList.innerHTML = opportunities.map(n => '<div class="swot-item"><i data-lucide="trending-up"></i> ' + n + ' <span style="font-size:0.8rem; color:var(--color-neutral-400); margin-left:8px;">(Foco: elevar à excelência)</span></div>').join('');
+      const planDiv = document.getElementById('implantationPlan');
+      let planHTML = '<div class="implantation-plan">';
+      
+      if (critical.length > 0) {
+        planHTML += '<div class="plan-section"><h5><i data-lucide="alert-circle" style="color:#ef4444"></i> Prioridade Imediata</h5><ul>';
+        planHTML += critical.map(p => '<li>' + p + '</li>').join('');
+        planHTML += '</ul></div>';
       }
+      
+      if (others.length > 0) {
+        planHTML += '<div class="plan-section"><h5><i data-lucide="trending-up" style="color:#eab308"></i> Também serão fortalecidos</h5><ul>';
+        planHTML += others.map(p => '<li>' + p + '</li>').join('');
+        planHTML += '</ul></div>';
+      }
+      
+      planHTML += '<div class="plan-footer">O Método FI® não atua apenas onde existem falhas. Nosso objetivo é elevar todos os pilares da jornada do aluno para construir uma cultura consistente de fidelização.</div>';
+      planHTML += '</div>';
+      
+      planDiv.innerHTML = planHTML;
+      
+      if (window.lucide) lucide.createIcons();
     }
 
     function generateInsights() {
@@ -886,7 +954,7 @@
 
     function renderRecommendations() {
       const recs = Object.keys(pillarNames)
-        .filter(id => (answers[id] ? answers[id].score : 0) < 85) // Recomenda para tudo que não é Referência
+        .filter(id => (answers[id] ? answers[id].score : 0) < 85)
         .map(id => recommendationsMap[id]);
 
       const list = document.getElementById('recommendationsList');
