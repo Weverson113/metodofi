@@ -60,7 +60,23 @@
       background: linear-gradient(135deg, #fff 0%, var(--color-gold-400) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .radar-subtitle { font-size: 1.125rem; color: var(--color-neutral-400); font-weight: 300; }
+    .radar-subtitle { font-size: 1.125rem; color: var(--color-neutral-400); font-weight: 300; margin-bottom: 24px; }
+    
+    .radar-intro {
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    .radar-intro p {
+      font-size: 1rem;
+      color: var(--color-neutral-200);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    .radar-intro strong { color: var(--color-gold-400); font-weight: 600; }
 
     .progress-container {
       background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 6px;
@@ -83,25 +99,25 @@
       width: 48px; height: 48px; border-radius: 50%; display: flex;
       align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; margin-bottom: 24px;
     }
-    .question-text { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; margin-bottom: 32px; color: #fff; line-height: 1.3; }
+    .question-text { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; margin-bottom: 32px; color: #fff; line-height: 1.4; }
 
     .options-grid { display: grid; gap: 16px; }
     .option-card {
       background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1);
       border-radius: 16px; padding: 20px 24px; cursor: pointer; transition: all 0.3s ease;
-      display: flex; align-items: center; gap: 16px;
+      display: flex; align-items: flex-start; gap: 16px; text-align: left;
     }
     .option-card:hover { background: rgba(212, 175, 55, 0.1); border-color: var(--color-gold-500); transform: translateX(8px); }
     .option-card.selected { background: rgba(212, 175, 55, 0.2); border-color: var(--color-gold-500); box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
     
     .option-icon {
       width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
     }
     .option-icon svg { width: 24px; height: 24px; }
     
-    .option-content h4 { font-weight: 600; font-size: 1.125rem; margin-bottom: 4px; color: #fff; }
-    .option-content p { font-size: 0.875rem; color: var(--color-neutral-400); }
+    .option-content h4 { font-weight: 600; font-size: 1rem; margin-bottom: 4px; color: #fff; line-height: 1.4; }
+    .option-content p { font-size: 0.875rem; color: var(--color-neutral-400); line-height: 1.4; }
 
     .btn-row { display: flex; gap: 16px; margin-top: 32px; }
     .btn-next {
@@ -204,7 +220,7 @@
     .chart-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; color: #fff; text-align: center; }
 
     .pillar-ranking { display: flex; flex-direction: column; gap: 16px; }
-    .pillar-row { display: grid; grid-template-columns: 90px 1fr 44px; align-items: center; gap: 12px; }
+    .pillar-row { display: grid; grid-template-columns: 110px 1fr 44px; align-items: center; gap: 12px; }
     .pillar-name { font-size: 0.8rem; color: var(--color-neutral-400); text-align: right; line-height: 1.2; }
     .pillar-track { background: rgba(255, 255, 255, 0.08); border-radius: 9999px; height: 10px; overflow: hidden; }
     .pillar-fill { height: 100%; width: 0; border-radius: 9999px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -221,7 +237,7 @@
     .swot-item svg { width: 18px; height: 18px; flex-shrink: 0; }
     .swot-col.strengths .swot-item svg { color: #22c55e; }
     .swot-col.opportunities .swot-item svg { color: #eab308; }
-    .swot-empty { font-size: 0.9rem; color: var(--color-neutral-500); font-style: italic; }
+    .swot-empty { font-size: 0.9rem; color: var(--color-neutral-500); font-style: italic; line-height: 1.5; }
 
     .insights-list { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; margin-bottom: 40px; }
     .insights-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 24px; color: #fff; text-align: center; }
@@ -282,7 +298,7 @@
       .quiz-card { padding: 32px 24px; }
       .question-text { font-size: 1.25rem; }
       .score-value { font-size: 3rem; }
-      .pillar-row { grid-template-columns: 72px 1fr 40px; gap: 8px; }
+      .pillar-row { grid-template-columns: 90px 1fr 40px; gap: 8px; }
       .pillar-name { font-size: 0.7rem; }
       .exec-summary, .recommendations, .cta-box { padding: 24px 20px; }
       .cta-box h3 { font-size: 1.35rem; }
@@ -306,7 +322,12 @@
         <span class="radar-logo-text">Radar FI®</span>
       </div>
       <h1 class="radar-title">Descubra seu Índice de Fidelização</h1>
-      <p class="radar-subtitle">Avalie a Maturidade da Jornada do Aluno em 7 etapas e receba seu diagnóstico estratégico.</p>
+      
+      <div class="radar-intro">
+        <p>Este diagnóstico não avalia apenas a retenção de alunos. Ele analisa a <strong>maturidade da jornada do aluno</strong> dentro da sua escola, identificando oportunidades para fortalecer acolhimento, experiência, permanência e crescimento sustentável.</p>
+      </div>
+
+      <p class="radar-subtitle">Responda às 7 perguntas e receba seu diagnóstico estratégico.</p>
     </div>
 
     <div class="progress-container">
@@ -404,81 +425,81 @@
     const questions = [
       {
         id: 1,
-        text: "Quando um novo aluno chega, o que ele vive nos primeiros 7 dias define se ele fica ou vai embora. Como é esse processo na sua escola?",
+        text: "Quando um novo aluno inicia o curso, como sua escola garante que ele se sinta acolhido, seguro e certo de que fez a escolha certa?",
         options: [
-          { icon: "heart-handshake", title: "Temos um ritual de boas-vindas estruturado e a equipe é treinada para acolher", score: 100, color: "#22c55e" },
-          { icon: "alert-circle", title: "Fazemos o nosso melhor, mas depende da boa vontade de cada um na recepção", score: 50, color: "#eab308" },
-          { icon: "x-circle", title: "O aluno paga a matrícula, recebe a grade e se vira para achar a sala", score: 0, color: "#ef4444" }
+          { icon: "heart-handshake", title: "Processo estruturado de acolhimento.", desc: "Toda a equipe participa da integração do aluno e existe um plano para os primeiros dias de aula.", score: 100, color: "#22c55e" },
+          { icon: "alert-circle", title: "Acolhimento informal.", desc: "Procuramos receber bem o aluno, mas depende muito da iniciativa de cada colaborador e não segue um padrão definido.", score: 50, color: "#eab308" },
+          { icon: "x-circle", title: "Sem processo de integração.", desc: "Após a matrícula, o aluno recebe as informações básicas e precisa descobrir sozinho como funciona a rotina da escola.", score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 2,
-        text: "A evasão não acontece de um dia para o outro. Ela começa com faltas não justificadas. Como sua escola age quando o aluno começa a sumir?",
+        text: "Quando um aluno começa a faltar ou demonstra sinais de desinteresse, como sua escola costuma agir?",
         options: [
-          { icon: "calendar-check", title: "Temos um protocolo ativo. A equipe entra em contato proativamente no mesmo dia", score: 100, color: "#22c55e" },
-          { icon: "alert-triangle", title: "Percebemos quando a falta se prolonga, mas a ação depende do professor", score: 50, color: "#eab308" },
-          { icon: "bell-off", title: "Só notamos a ausência quando o aluno ou os pais pedem o cancelamento", score: 0, color: "#ef4444" }
+          { icon: "calendar-check", title: "Protocolo de acompanhamento ativo.", desc: "A equipe identifica rapidamente os primeiros sinais e entra em contato com o aluno ou responsável antes que o problema aumente.", score: 100, color: "#22c55e" },
+          { icon: "alert-triangle", title: "Acompanhamento reativo.", desc: "Percebemos a situação depois de algumas faltas, mas o acompanhamento depende principalmente da iniciativa do professor ou coordenador.", score: 50, color: "#eab308" },
+          { icon: "bell-off", title: "Ação apenas no cancelamento.", desc: "Normalmente descobrimos a gravidade da situação quando o aluno ou a família já decidiu cancelar a matrícula.", score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 3,
-        text: "O aluno percebe imediatamente quando os setores da escola não conversam entre si. Como está a integração entre Comercial, Secretaria e Pedagógico?",
+        text: "Como Comercial, Secretaria, Financeiro e Pedagógico compartilham informações importantes sobre os alunos?",
         options: [
-          { icon: "users-round", title: "Totalmente alinhados. Compartilhamos informações do aluno em rituais constantes", score: 100, color: "#22c55e" },
-          { icon: "puzzle", title: "Cada setor faz a sua parte bem, mas a comunicação entre eles é falha", score: 50, color: "#eab308" },
-          { icon: "heart-crack", title: "Trabalhamos isolados. Muitas vezes o pedagógico não sabe o que o comercial prometeu", score: 0, color: "#ef4444" }
+          { icon: "users-round", title: "Comunicação constante e integrada.", desc: "Existem reuniões de alinhamento e todos acompanham a jornada do aluno de forma integrada.", score: 100, color: "#22c55e" },
+          { icon: "puzzle", title: "Comunicação falha ou lenta.", desc: "Os setores trabalham bem individualmente, mas a troca de informações acontece apenas quando surge algum problema.", score: 50, color: "#eab308" },
+          { icon: "heart-crack", title: "Setores isolados.", desc: "Cada setor atua isoladamente. Muitas vezes um departamento desconhece informações importantes registradas por outro.", score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 4,
-        text: "O fim do curso é o momento de maior vulnerabilidade para a saída do aluno. Como sua escola lida com a conclusão dos módulos?",
+        text: "Como sua escola mantém o aluno motivado e conectado durante todo o curso?",
         options: [
-          { icon: "graduation-cap", title: "Celebramos a conquista com rituais, reconhecimento e senso de dever cumprido", score: 100, color: "#22c55e" },
-          { icon: "minus", title: "O curso termina normalmente, com a entrega do certificado, sem muita celebração", score: 50, color: "#eab308" },
-          { icon: "x", title: "O aluno simplesmente para de vir e o vínculo se encerra sem cerimônia", score: 0, color: "#ef4444" }
+          { icon: "star", title: "Ações planejadas de engajamento.", desc: "Possuímos ações para fortalecer o vínculo do aluno, celebrar conquistas e manter o engajamento durante toda a jornada.", score: 100, color: "#22c55e" },
+          { icon: "minus", title: "Ações esporádicas.", desc: "Realizamos algumas ações, porém não existe uma estratégia contínua voltada para a experiência do aluno.", score: 50, color: "#eab308" },
+          { icon: "x", title: "Sem estratégia institucional.", desc: "Cada professor conduz sua turma da sua maneira e não existe uma estratégia para fortalecer o relacionamento com os alunos.", score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 5,
-        text: "A rematrícula deve ser uma consequência natural, não um esforço de última hora. Como sua escola aborda a renovação do aluno?",
+        text: "Como sua escola conduz o processo de continuidade dos alunos após a conclusão do curso ou módulo?",
         options: [
-          { icon: "repeat", title: "Apresentamos o próximo passo de forma natural, antes do contrato acabar", score: 100, color: "#22c55e" },
-          { icon: "clock", title: "Fazemos campanhas de renovação no último mês, focando em descontos e prazos", score: 50, color: "#eab308" },
-          { icon: "user-x", title: "Esperamos o aluno procurar a secretaria ou partimos do princípio que ele vai embora", score: 0, color: "#ef4444" }
+          { icon: "repeat", title: "Rematrícula como processo natural.", desc: "Apresentamos os próximos cursos e oportunidades de evolução durante toda a jornada do aluno.", score: 100, color: "#22c55e" },
+          { icon: "clock", title: "Campanhas de última hora.", desc: "Realizamos campanhas de renovação apenas próximo ao encerramento, normalmente com foco em descontos.", score: 50, color: "#eab308" },
+          { icon: "user-x", title: "Expectativa passiva.", desc: "Esperamos que o aluno procure a escola novamente ou simplesmente aceitamos sua saída como algo natural.", score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 6,
-        text: "Aluno fiel é o melhor vendedor da escola. Hoje, de que forma os alunos atuais ajudam a trazer novos alunos?",
+        text: "Hoje, como os alunos ajudam sua escola a conquistar novos estudantes?",
         options: [
-          { icon: "user-plus", title: "Temos um programa estruturado e os alunos indicam espontaneamente", score: 100, color: "#22c55e" },
-          { icon: "users", title: "Alguns indicam por conta própria, mas não temos um processo que facilite isso", score: 50, color: "#eab308" },
-          { icon: "trending-down", title: "Raramente recebemos indicações. Dependemos quase 100% de marketing pago", score: 0, color: "#ef4444" }
+          { icon: "user-plus", title: "Cultura de indicação estruturada.", desc: "Possuímos ações que incentivam recomendações espontâneas e valorizam os alunos que indicam novos estudantes.", score: 100, color: "#22c55e" },
+          { icon: "users", title: "Indicações naturais, sem processo.", desc: "Recebemos algumas indicações naturalmente, mas não existe um processo estruturado para incentivar esse comportamento.", score: 50, color: "#eab308" },
+          { icon: "trending-down", title: "Dependência de marketing pago.", desc: "Dependemos quase exclusivamente de campanhas de marketing e mídia paga para captar novos alunos.", score: 0, color: "#ef4444" }
         ]
       },
       {
         id: 7,
-        text: "Muitas vezes o aluno sai sem dizer o motivo real. Sua escola possui um canal ativo e constante de escuta e feedback dos alunos?",
+        text: "Como sua escola utiliza a opinião dos alunos para melhorar a experiência oferecida?",
         options: [
-          { icon: "message-square", title: "Sim, coletamos feedbacks periódicos e agimos visivelmente sobre eles", score: 100, color: "#22c55e" },
-          { icon: "clipboard-list", title: "Fazemos pesquisas anuais, mas raramente mudamos algo com base nos resultados", score: 50, color: "#eab308" },
-          { icon: "eye-off", title: "Não temos um processo formal de escuta. Só sabemos o que ele pensa quando ele cancela", score: 0, color: "#ef4444" }
+          { icon: "message-square", title: "Feedback regular com ação visível.", desc: "Coletamos feedbacks regularmente, analisamos os resultados e implementamos melhorias visíveis para alunos e equipe.", score: 100, color: "#22c55e" },
+          { icon: "clipboard-list", title: "Pesquisas ocasionais sem ação.", desc: "Realizamos pesquisas ocasionais, mas poucas mudanças são efetivamente colocadas em prática.", score: 50, color: "#eab308" },
+          { icon: "eye-off", title: "Sem processo de escuta.", desc: "Não existe um processo estruturado para ouvir os alunos. Descobrimos os problemas apenas quando ocorre um cancelamento.", score: 0, color: "#ef4444" }
         ]
       }
     ];
 
     const pillarNames = {
-      1: 'Recebimento', 2: 'Frequência', 3: 'Equipe', 4: 'Conclusão', 5: 'Rematrícula', 6: 'Indicação', 7: 'Escuta'
+      1: 'Acolhimento', 2: 'Frequência', 3: 'Equipes', 4: 'Experiência', 5: 'Rematrícula', 6: 'Indicação', 7: 'Escuta'
     };
 
     const recommendationsMap = {
-      1: 'Estruturar um ritual de boas-vindas nos primeiros 7 dias. O vínculo que segura a frequência nasce aqui.',
-      2: 'Criar um protocolo de acionamento automático quando o aluno falta. Quem é acolhido, precisa ser sentido.',
-      3: 'Integrar comercial, secretaria e coordenação pedagógica com rituais semanais de alinhamento.',
-      4: 'Transformar o fim do curso em celebração. Formatura deve ser orgulho, não apenas um trâmite burocrático.',
-      5: 'Antecipar a conversa sobre o próximo módulo. A rematrícula deve ser uma continuidade natural, não uma campanha de desespero.',
-      6: 'Implementar um programa de indicação que recompense o aluno fiel. Quem está satisfeito é seu melhor vendedor.',
-      7: 'Implantar pesquisas de satisfação periódicas, com plano de ação visível para a equipe e para o aluno.'
+      1: 'Estruturar um processo de acolhimento para os primeiros dias de aula. Toda a equipe deve participar da integração.',
+      2: 'Criar um protocolo de acionamento automático nas primeiras faltas. Quem é acolhido precisa ser sentido.',
+      3: 'Implementar rituais semanais de alinhamento entre Comercial, Secretaria, Financeiro e Pedagógico.',
+      4: 'Desenvolver ações contínuas para celebrar conquistas e fortalecer o vínculo do aluno com a instituição.',
+      5: 'Antecipar a conversa sobre evolução. A rematrícula deve ser apresentada como continuidade natural, não como campanha.',
+      6: 'Implementar um programa de indicação que recompense e valorize o aluno fiel. Ele é seu melhor vendedor.',
+      7: 'Implantar pesquisas de satisfação periódicas, com plano de ação visível para mostrar ao aluno que a opinião dele importa.'
     };
 
     let currentQuestion = 0;
@@ -509,6 +530,7 @@
             </div>
             <div class="option-content">
               <h4>${option.title}</h4>
+              <p>${option.desc}</p>
             </div>
           </div>
         `;
@@ -595,7 +617,7 @@
     function runLoading(level) {
       const msgs = [
         'Analisando indicadores da sua escola',
-        'Comparando padrões de retenção',
+        'Comparando padrões de maturidade',
         'Calculando o Índice FI®',
         'Gerando diagnóstico estratégico',
         'Finalizando relatório'
@@ -719,7 +741,7 @@
       radarChartInstance = new Chart(radarCtx, {
         type: 'radar',
         data: {
-          labels: ['Recebimento', 'Frequência', 'Equipe', 'Conclusão', 'Rematrícula', 'Indicação', 'Escuta'],
+          labels: ['Acolhimento', 'Frequência', 'Equipes', 'Experiência', 'Rematrícula', 'Indicação', 'Escuta'],
           datasets: [{
             label: 'Sua Escola',
             data: [
@@ -809,10 +831,10 @@
 
     function generateInsights() {
       const insights = [];
-      if (answers[1] && answers[1].score < 100) insights.push({ type: 'warning', text: 'O primeiro contato define o vínculo. Sem um recebimento estruturado, a frequência futura fica comprometida.' });
-      if (answers[2] && answers[2].score < 100) insights.push({ type: 'critical', text: 'Falta um protocolo ativo de frequência. Aluno que não é sentido quando falta, é um aluno que evadiu silenciosamente.' });
+      if (answers[1] && answers[1].score < 100) insights.push({ type: 'warning', text: 'Sem um processo estruturado de acolhimento, a frequência futura fica comprometida desde o primeiro dia.' });
+      if (answers[2] && answers[2].score < 100) insights.push({ type: 'critical', text: 'Falta um protocolo ativo de acompanhamento. Aluno que não é sentido quando falta, é um aluno que evadiu silenciosamente.' });
       if (answers[3] && answers[3].score < 100) insights.push({ type: 'critical', text: 'Setores desconectados geram experiências inconsistentes. O aluno percebe a falta de integração e isso quebra a confiança na instituição.' });
-      if (answers[4] && answers[4].score < 100) insights.push({ type: 'warning', text: 'A conclusão do curso precisa ser uma celebração. É o momento de transformar o aluno em embaixador da marca.' });
+      if (answers[4] && answers[4].score < 100) insights.push({ type: 'warning', text: 'A experiência do aluno precisa ser construída todos os dias. Ações esporádicas não sustentam o vínculo a longo prazo.' });
       if (answers[5] && answers[5].score < 100) insights.push({ type: 'critical', text: 'Rematrícula não é campanha de último minuto. Ela deve ser apresentada como continuidade natural antes do fim do contrato.' });
       if (answers[6] && answers[6].score < 100) insights.push({ type: 'warning', text: 'Sua escola está deixando de aproveitar o canal de aquisição mais barato e qualificado: a indicação de alunos atuais.' });
       if (answers[7] && answers[7].score < 100) insights.push({ type: 'warning', text: 'Sem escuta ativa, a escola fica cega. Coletar feedback antes do cancelamento é a única forma de agir preventivamente.' });
