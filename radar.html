@@ -103,8 +103,9 @@
     .option-content h4 { font-weight: 600; font-size: 1.125rem; margin-bottom: 4px; color: #fff; }
     .option-content p { font-size: 0.875rem; color: var(--color-neutral-400); }
 
+    .btn-row { display: flex; gap: 16px; margin-top: 32px; }
     .btn-next {
-      width: 100%; margin-top: 32px; padding: 20px 40px;
+      flex: 1; padding: 20px 40px;
       background: linear-gradient(135deg, var(--color-gold-500) 0%, var(--color-gold-600) 100%);
       color: var(--color-navy-950); border: none; border-radius: 16px;
       font-family: var(--font-heading); font-weight: 700; font-size: 1.125rem;
@@ -112,6 +113,16 @@
     }
     .btn-next:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4); }
     .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    
+    .btn-back {
+      padding: 20px 28px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-neutral-400); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px;
+      font-family: var(--font-heading); font-weight: 600; font-size: 1rem;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .btn-back:hover:not(:disabled) { background: rgba(255, 255, 255, 0.1); color: #fff; }
+    .btn-back:disabled { opacity: 0.3; cursor: not-allowed; }
 
     /* TELA DE PROCESSAMENTO */
     .loading-screen {
@@ -177,7 +188,6 @@
     .market-stat .num { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; line-height: 1; }
     .market-stat .lbl { font-size: 0.75rem; color: var(--color-neutral-400); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
 
-    /* PARÁGRAFO EXECUTIVO */
     .exec-summary {
       background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
       border-left: 4px solid var(--color-gold-500); border-radius: 16px;
@@ -201,7 +211,6 @@
     .pillar-fill { height: 100%; width: 0; border-radius: 9999px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
     .pillar-value { font-family: var(--font-heading); font-weight: 700; font-size: 0.95rem; text-align: right; }
 
-    /* PONTOS FORTES / OPORTUNIDADES */
     .swot-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
     @media(min-width: 768px) { .swot-grid { grid-template-columns: 1fr 1fr; } }
     .swot-col { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 28px; }
@@ -229,7 +238,6 @@
     .insight-icon.critical { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
     .insight-text { font-size: 1rem; color: var(--color-neutral-300); line-height: 1.5; }
 
-    /* RECOMENDAÇÕES */
     .recommendations { background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.02) 100%); border: 1px solid rgba(212,175,55,0.25); border-radius: 20px; padding: 32px; margin-bottom: 40px; }
     .recommendations h3 { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: #fff; text-align: center; margin-bottom: 8px; }
     .recommendations .rec-sub { text-align: center; color: var(--color-neutral-400); font-size: 0.95rem; margin-bottom: 24px; }
@@ -253,7 +261,17 @@
     }
     .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4); }
 
-    /* RODAPÉ DE EXCLUSIVIDADE DO RELATÓRIO */
+    .btn-restart {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      padding: 12px 24px;
+      background: transparent;
+      color: var(--color-neutral-400); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px;
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+      cursor: pointer; transition: all 0.3s ease; text-decoration: none;
+    }
+    .btn-restart:hover { color: #fff; border-color: var(--color-gold-500); }
+    .btn-restart svg { width: 16px; height: 16px; }
+
     .report-footer { text-align: center; margin-top: 36px; font-size: 0.8rem; color: var(--color-neutral-500); letter-spacing: 0.03em; line-height: 1.6; }
     .report-footer .rf-brand { color: var(--color-gold-500); font-weight: 600; }
 
@@ -269,12 +287,13 @@
       .pillar-name { font-size: 0.7rem; }
       .exec-summary, .recommendations, .cta-box { padding: 24px 20px; }
       .cta-box h3 { font-size: 1.35rem; }
+      .btn-row { flex-direction: column-reverse; }
+      .btn-back { padding: 16px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- TELA DE PROCESSAMENTO -->
   <div class="loading-screen" id="loadingScreen">
     <div class="loading-spinner"></div>
     <div class="loading-title">Processando seu diagnóstico...</div>
@@ -371,6 +390,10 @@
           <i data-lucide="message-circle" style="width: 24px; height: 24px;"></i>
           Solicitar uma apresentação do Método FI®
         </a>
+        <br>
+        <button class="btn-restart" onclick="restartQuiz()">
+          <i data-lucide="rotate-ccw"></i> Refazer diagnóstico
+        </button>
         <p style="margin-top: 16px; font-size: 0.875rem; color: var(--color-neutral-500);">100% Gratuito • Sem compromisso</p>
       </div>
 
@@ -391,7 +414,7 @@
       },
       {
         id: 2,
-        text: "Como a escola monitora e age quando um aluno começa a faltar às aulas?",
+        text: "Além do acolhimento inicial, como a escola acompanha a presença do aluno ao longo do curso?",
         options: [
           { icon: "calendar-check", title: "Temos protocolo ativo. A equipe entra em contato proativamente", score: 100, color: "#22c55e" },
           { icon: "alert-triangle", title: "Percebemos quando a falta se prolonga, mas a ação depende do professor", score: 50, color: "#eab308" },
@@ -443,6 +466,8 @@
     let answers = {};
     let totalScore = 0;
     let scoreColor = '#d4af37';
+    let scoreChartInstance = null;
+    let radarChartInstance = null;
 
     function getLevel(score) {
       if (score >= 80) return { color: '#22c55e', label: 'EXCELENTE', icon: 'award', bg: 'rgba(34,197,94,0.15)', phrase: 'Sua escola é referência em fidelização. O Método FI® ajuda a sustentar e elevar ainda mais esse padrão de elite.' };
@@ -457,8 +482,9 @@
       
       let optionsHTML = '';
       question.options.forEach((option, index) => {
+        const isSelected = answers[question.id] && answers[question.id].title === option.title;
         optionsHTML += `
-          <div class="option-card" onclick="selectOption(${index})" data-index="${index}">
+          <div class="option-card ${isSelected ? 'selected' : ''}" onclick="selectOption(${index})" data-index="${index}">
             <div class="option-icon" style="color: ${option.color}">
               <i data-lucide="${option.icon}"></i>
             </div>
@@ -475,9 +501,14 @@
         <div class="options-grid">
           ${optionsHTML}
         </div>
-        <button class="btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
-          ${currentQuestion === questions.length - 1 ? 'Ver Meu Índice FI®' : 'Próxima Pergunta'}
-        </button>
+        <div class="btn-row">
+          <button class="btn-back" id="backBtn" onclick="backQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+            ← Voltar
+          </button>
+          <button class="btn-next" id="nextBtn" onclick="nextQuestion()" disabled>
+            ${currentQuestion === questions.length - 1 ? 'Ver Meu Índice FI®' : 'Próxima Pergunta'}
+          </button>
+        </div>
       `;
 
       if (window.lucide) lucide.createIcons();
@@ -498,6 +529,30 @@
       } else {
         calculateResults();
       }
+    }
+
+    function backQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+      }
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      answers = {};
+      totalScore = 0;
+      scoreColor = '#d4af37';
+      
+      if (scoreChartInstance) { scoreChartInstance.destroy(); scoreChartInstance = null; }
+      if (radarChartInstance) { radarChartInstance.destroy(); radarChartInstance = null; }
+      
+      document.getElementById('resultsDashboard').style.display = 'none';
+      document.getElementById('quizCard').classList.remove('hidden');
+      document.querySelector('.progress-container').classList.remove('hidden');
+      
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function updateProgress() {
@@ -618,7 +673,8 @@
 
     function createCharts(level) {
       const scoreCtx = document.getElementById('scoreChart').getContext('2d');
-      new Chart(scoreCtx, {
+      if (scoreChartInstance) scoreChartInstance.destroy();
+      scoreChartInstance = new Chart(scoreCtx, {
         type: 'doughnut',
         data: {
           datasets: [{
@@ -640,7 +696,8 @@
       });
 
       const radarCtx = document.getElementById('radarChart').getContext('2d');
-      new Chart(radarCtx, {
+      if (radarChartInstance) radarChartInstance.destroy();
+      radarChartInstance = new Chart(radarCtx, {
         type: 'radar',
         data: {
           labels: ['Recebimento', 'Frequência', 'Conclusão', 'Rematrícula', 'Indicação'],
@@ -773,8 +830,8 @@
 
     function updateWhatsAppLink() {
       const link = document.getElementById('whatsappLink');
-      const currentHref = link.getAttribute('href');
-      link.setAttribute('href', currentHref + totalScore);
+      const baseHref = 'https://wa.me/5531984706404?text=Ol%C3%A1%2C%20Prof.%20Weverson!%20Completei%20o%20Radar%20FI%C2%AE%20e%20gostaria%20de%20solicitar%20uma%20apresenta%C3%A7%C3%A3o%20do%20M%C3%A9todo%20FI%C2%AE.%20Meu%20%C3%8Dndice%20FI%C2%AE%20foi%20de%20';
+      link.setAttribute('href', baseHref + totalScore);
     }
 
     window.addEventListener('DOMContentLoaded', () => {
