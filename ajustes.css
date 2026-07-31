@@ -117,6 +117,17 @@
   margin-top: 0 !important;
   padding-top: 12px !important;
 }
+  /* CORREÇÃO: Evita que as caixas tremam ao rolar no celular */
+html, body {
+  overflow-x: hidden !important; /* Trava a tela para não ir para os lados */
+}
+
+.quiz-card {
+  /* O efeito de vidro (blur) é muito pesado para o celular e causa o tremor */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(10, 25, 47, 0.95) !important; /* Fundo sólido para manter o visual */
+}
 
 /* =========================================================================
    v11 — ACABAMENTOS (tudo que faltava, numa peça só; o v10 acima segue intacto)
