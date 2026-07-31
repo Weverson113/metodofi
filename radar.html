@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>weak[0].name + ' — e é exatamente nele que o Método FI® atua primeiro.';
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
@@ -124,7 +124,6 @@
     .btn-back:hover:not(:disabled) { background: rgba(255, 255, 255, 0.1); color: #fff; }
     .btn-back:disabled { opacity: 0.3; cursor: not-allowed; }
 
-    /* TELA DE PROCESSAMENTO */
     .loading-screen {
       display: none; position: fixed; inset: 0; z-index: 100;
       background: linear-gradient(135deg, var(--color-navy-950) 0%, var(--color-navy-900) 100%);
@@ -307,12 +306,12 @@
         <span class="radar-logo-text">Radar FI®</span>
       </div>
       <h1 class="radar-title">Descubra seu Índice de Fidelização</h1>
-      <p class="radar-subtitle">Avalie a Maturidade da Jornada do Aluno em 5 etapas e receba seu diagnóstico estratégico.</p>
+      <p class="radar-subtitle">Avalie a Maturidade da Jornada do Aluno em 7 etapas e receba seu diagnóstico estratégico.</p>
     </div>
 
     <div class="progress-container">
       <div class="progress-bar" id="progressBar" style="width: 0%"></div>
-      <div class="progress-text" id="progressText">Questão 1 de 5</div>
+      <div class="progress-text" id="progressText">Questão 1 de 7</div>
     </div>
 
     <div class="quiz-card" id="quizCard">
@@ -356,7 +355,7 @@
           <canvas id="radarChart"></canvas>
         </div>
         <div class="chart-card">
-          <h3 class="chart-title">Ranking dos 5 Pilares</h3>
+          <h3 class="chart-title">Ranking dos 7 Pilares</h3>
           <div class="pillar-ranking" id="pillarRanking"></div>
         </div>
       </div>
@@ -385,7 +384,7 @@
 
       <div class="cta-box">
         <h3>O diagnóstico mostrou onde sua escola está hoje.<br><span style="color: var(--color-gold-400)">O Método FI® mostra como chegar ao próximo nível.</span></h3>
-        <p>O Radar FI® identifica oportunidades. A implantação do Método FI® transforma essas oportunidades em ações práticas — fortalecendo retenção, pertencimento, experiência do aluno e resultados da instituição.</p>
+        <p>O Radar FI® identifica oportunidades. A implantação do Método FI® transforma essas oportunidades em ações práticas, fortalecendo retenção, pertencimento, experiência do aluno e resultados da instituição.</p>
         <a href="https://wa.me/5531984706404?text=Ol%C3%A1%2C%20Prof.%20Weverson!%20Completei%20o%20Radar%20FI%C2%AE%20e%20gostaria%20de%20solicitar%20uma%20apresenta%C3%A7%C3%A3o%20do%20M%C3%A9todo%20FI%C2%AE.%20Meu%20%C3%8Dndice%20FI%C2%AE%20foi%20de%20" target="_blank" class="btn-whatsapp" id="whatsappLink">
           <i data-lucide="message-circle" style="width: 24px; height: 24px;"></i>
           Solicitar uma apresentação do Método FI®
@@ -403,53 +402,6 @@
 
   <script>
     const questions = [
-      {
-        id: 1,
-        text: "Como é a recepção e o acolhimento de um novo aluno nos primeiros dias?",
-        options: [
-          { icon: "heart-handshake", title: "Processo estruturado de boas-vindas e integração imediata", score: 100, color: "#22c55e" },
-          { icon: "alert-circle", title: "Fazemos o nosso melhor, mas depende da disponibilidade de cada um", score: 50, color: "#eab308" },
-          { icon: "x-circle", title: "O aluno é apenas matriculado, paga a taxa e recebe a grade", score: 0, color: "#ef4444" }
-        ]
-      },
-      {
-        id: 2,
-        text: "Além do acolhimento inicial, como a escola acompanha a presença do aluno ao longo do curso?",
-        options: [
-          { icon: "calendar-check", title: "Temos protocolo ativo. A equipe entra em contato proativamente", score: 100, color: "#22c55e" },
-          { icon: "alert-triangle", title: "Percebemos quando a falta se prolonga, mas a ação depende do professor", score: 50, color: "#eab308" },
-          { icon: "bell-off", title: "Só notamos a ausência quando o aluno pede cancelamento", score: 0, color: "#ef4444" }
-        ]
-      },
-      {
-        id: 3,
-        text: "Como é a experiência do aluno ao se aproximar do fim do curso ou módulo?",
-        options: [
-          { icon: "graduation-cap", title: "Celebramos a conquista com rituais, reconhecimento e senso de dever cumprido", score: 100, color: "#22c55e" },
-          { icon: "minus", title: "O curso termina normalmente, com a entrega do certificado, sem muita celebração", score: 50, color: "#eab308" },
-          { icon: "x", title: "O aluno simplesmente para de vir e o vínculo se encerra sem cerimônia", score: 0, color: "#ef4444" }
-        ]
-      },
-      {
-        id: 4,
-        text: "Como a escola aborda a renovação (rematrícula) para o próximo curso?",
-        options: [
-          { icon: "repeat", title: "Apresentamos o próximo passo de forma natural, antes do contrato acabar", score: 100, color: "#22c55e" },
-          { icon: "clock", title: "Fazemos campanhas de renovação no último mês, focando em descontos", score: 50, color: "#eab308" },
-          { icon: "user-x", title: "Esperamos o aluno procurar a secretaria ou partimos do princípio que ele vai embora", score: 0, color: "#ef4444" }
-        ]
-      },
-      {
-        id: 5,
-        text: "De que forma os alunos atuais contribuem para a chegada de novos alunos?",
-        options: [
-          { icon: "user-plus", title: "Temos um programa estruturado e os alunos indicam espontaneamente", score: 100, color: "#22c55e" },
-          { icon: "users", title: "Alguns indicam por conta própria, mas não temos um processo que facilite isso", score: 50, color: "#eab308" },
-          { icon: "trending-down", title: "Raramente recebemos indicações; dependemos quase 100% de marketing pago", score: 0, color: "#ef4444" }
-        ]
-      }
-    ];
-        const questions = [
       {
         id: 1,
         text: "Quando um novo aluno chega, o que ele vive nos primeiros 7 dias define se ele fica ou vai embora. Como é esse processo na sua escola?",
@@ -514,20 +466,19 @@
         ]
       }
     ];
-    
 
-
-
-        const pillarNames = {       1: 'Recebimento', 2: 'Frequência', 3: 'Equipe', 4: 'Conclusão', 5: 'Rematrícula', 6: 'Indicação', 7: 'Escuta'     };      const recommendationsMap = {       1: 'Estruturar um ritual de boas-vindas nos primeiros 7 dias. O vínculo que segura a frequência nasce aqui.',       2: 'Criar um protocolo de acionamento automático quando o aluno falta. Quem é acolhido, precisa ser sentido.',       3: 'Integrar comercial, secretaria e coordenação pedagógica com rituais semanais de alinhamento.',       4: 'Transformar o fim do curso em celebração. Formatura deve ser orgulho, não apenas um trâmite burocrático.',       5: 'Antecipar a conversa sobre o próximo módulo. A rematrícula deve ser uma continuidade natural, não uma campanha de desespero.',       6: 'Implementar um programa de indicação que recompense o aluno fiel. Quem está satisfeito é seu melhor vendedor.',       7: 'Implantar pesquisas de satisfação periódicas, com plano de ação visível para a equipe e para o aluno.'     }; = {
-      1: 'Recebimento', 2: 'Frequência', 3: 'Conclusão', 4: 'Rematrícula', 5: 'Indicação'
+    const pillarNames = {
+      1: 'Recebimento', 2: 'Frequência', 3: 'Equipe', 4: 'Conclusão', 5: 'Rematrícula', 6: 'Indicação', 7: 'Escuta'
     };
 
     const recommendationsMap = {
       1: 'Estruturar um ritual de boas-vindas nos primeiros 7 dias. O vínculo que segura a frequência nasce aqui.',
       2: 'Criar um protocolo de acionamento automático quando o aluno falta. Quem é acolhido, precisa ser sentido.',
-      3: 'Transformar o fim do curso em celebração. Formatura deve ser orgulho, não apenas um trâmite burocrático.',
-      4: 'Antecipar a conversa sobre o próximo módulo. A rematrícula deve ser uma continuidade natural, não uma campanha de desespero.',
-      5: 'Implementar um programa de indicação que recompense o aluno fiel. Quem está satisfeito é seu melhor vendedor.'
+      3: 'Integrar comercial, secretaria e coordenação pedagógica com rituais semanais de alinhamento.',
+      4: 'Transformar o fim do curso em celebração. Formatura deve ser orgulho, não apenas um trâmite burocrático.',
+      5: 'Antecipar a conversa sobre o próximo módulo. A rematrícula deve ser uma continuidade natural, não uma campanha de desespero.',
+      6: 'Implementar um programa de indicação que recompense o aluno fiel. Quem está satisfeito é seu melhor vendedor.',
+      7: 'Implantar pesquisas de satisfação periódicas, com plano de ação visível para a equipe e para o aluno.'
     };
 
     let currentQuestion = 0;
@@ -768,7 +719,7 @@
       radarChartInstance = new Chart(radarCtx, {
         type: 'radar',
         data: {
-          labels: ['Recebimento', 'Frequência', 'Conclusão', 'Rematrícula', 'Indicação'],
+          labels: ['Recebimento', 'Frequência', 'Equipe', 'Conclusão', 'Rematrícula', 'Indicação', 'Escuta'],
           datasets: [{
             label: 'Sua Escola',
             data: [
@@ -776,7 +727,9 @@
               answers[2] ? answers[2].score : 0,
               answers[3] ? answers[3].score : 0,
               answers[4] ? answers[4].score : 0,
-              answers[5] ? answers[5].score : 0
+              answers[5] ? answers[5].score : 0,
+              answers[6] ? answers[6].score : 0,
+              answers[7] ? answers[7].score : 0
             ],
             backgroundColor: 'rgba(212, 175, 55, 0.2)',
             borderColor: '#d4af37',
@@ -841,7 +794,7 @@
 
       const sList = document.getElementById('strengthsList');
       if (strengths.length === 0) {
-        sList.innerHTML = '<div class="swot-empty">Consideramos <strong>ponto forte</strong> qualquer pilar acima de <strong>70% de maturidade</strong>. Nenhum dos seus atingiu esse patamar ainda — mas isso significa que há muito espaço para crescer, e é exatamente aí que o Método FI® atua primeiro.</div>';
+        sList.innerHTML = '<div class="swot-empty">Consideramos <strong>ponto forte</strong> qualquer pilar acima de <strong>70% de maturidade</strong>. Nenhum dos seus atingiu esse patamar ainda, mas isso significa que há muito espaço para crescer. É exatamente aí que o Método FI® atua primeiro.</div>';
       } else {
         sList.innerHTML = strengths.map(n => '<div class="swot-item"><i data-lucide="check-circle-2"></i> ' + n + '</div>').join('');
       }
@@ -858,9 +811,11 @@
       const insights = [];
       if (answers[1] && answers[1].score < 100) insights.push({ type: 'warning', text: 'O primeiro contato define o vínculo. Sem um recebimento estruturado, a frequência futura fica comprometida.' });
       if (answers[2] && answers[2].score < 100) insights.push({ type: 'critical', text: 'Falta um protocolo ativo de frequência. Aluno que não é sentido quando falta, é um aluno que evadiu silenciosamente.' });
-      if (answers[3] && answers[3].score < 100) insights.push({ type: 'warning', text: 'A conclusão do curso precisa ser uma celebração. É o momento de transformar o aluno em embaixador da marca.' });
-      if (answers[4] && answers[4].score < 100) insights.push({ type: 'critical', text: 'Rematrícula não é campanha de último minuto. Ela deve ser apresentada como continuidade natural antes do fim do contrato.' });
-      if (answers[5] && answers[5].score < 100) insights.push({ type: 'warning', text: 'Sua escola está deixando de aproveitar o canal de aquisição mais barato e qualificado: a indicação de alunos atuais.' });
+      if (answers[3] && answers[3].score < 100) insights.push({ type: 'critical', text: 'Setores desconectados geram experiências inconsistentes. O aluno percebe a falta de integração e isso quebra a confiança na instituição.' });
+      if (answers[4] && answers[4].score < 100) insights.push({ type: 'warning', text: 'A conclusão do curso precisa ser uma celebração. É o momento de transformar o aluno em embaixador da marca.' });
+      if (answers[5] && answers[5].score < 100) insights.push({ type: 'critical', text: 'Rematrícula não é campanha de último minuto. Ela deve ser apresentada como continuidade natural antes do fim do contrato.' });
+      if (answers[6] && answers[6].score < 100) insights.push({ type: 'warning', text: 'Sua escola está deixando de aproveitar o canal de aquisição mais barato e qualificado: a indicação de alunos atuais.' });
+      if (answers[7] && answers[7].score < 100) insights.push({ type: 'warning', text: 'Sem escuta ativa, a escola fica cega. Coletar feedback antes do cancelamento é a única forma de agir preventivamente.' });
 
       if (insights.length === 0) insights.push({ type: 'positive', text: 'Parabéns! Sua escola domina a jornada do aluno de ponta a ponta. O Método FI® ajudará a sustentar e escalar esse padrão.' });
 
@@ -869,7 +824,7 @@
       if (negatives === 0) {
         titleEl.textContent = 'Sua escola é referência na Jornada do Aluno';
       } else {
-        titleEl.textContent = negatives + ' ponto' + (negatives > 1 ? 's' : '') + ' que está' + (negatives > 1 ? 'o' : '') + ' rompendo o ciclo de fidelização';
+        titleEl.textContent = negatives + ' pontos que estão rompendo o ciclo de fidelização';
       }
 
       const container = document.getElementById('insightsContainer');
