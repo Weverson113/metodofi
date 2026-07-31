@@ -762,11 +762,25 @@
       document.getElementById('nextBtn').disabled = false;
     }
 
-    function nextQuestion() {
+      function nextQuestion() {
       if (currentQuestion < questions.length - 1) {
         currentQuestion++;
         renderQuestion();
+        // Rola a tela para o topo do card da pergunta
+        document.getElementById('quizCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
+        calculateResults();
+      }
+    }
+
+    function backQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+        // Rola a tela para o topo do card da pergunta
+        document.getElementById('quizCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
         calculateResults();
       }
     }
