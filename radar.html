@@ -449,6 +449,74 @@
         ]
       }
     ];
+        const questions = [
+      {
+        id: 1,
+        text: "Quando um novo aluno chega, o que ele vive nos primeiros 7 dias define se ele fica ou vai embora. Como é esse processo na sua escola?",
+        options: [
+          { icon: "heart-handshake", title: "Temos um ritual de boas-vindas estruturado e a equipe é treinada para acolher", score: 100, color: "#22c55e" },
+          { icon: "alert-circle", title: "Fazemos o nosso melhor, mas depende da boa vontade de cada um na recepção", score: 50, color: "#eab308" },
+          { icon: "x-circle", title: "O aluno paga a matrícula, recebe a grade e se vira para achar a sala", score: 0, color: "#ef4444" }
+        ]
+      },
+      {
+        id: 2,
+        text: "A evasão não acontece de um dia para o outro. Ela começa com faltas não justificadas. Como sua escola age quando o aluno começa a sumir?",
+        options: [
+          { icon: "calendar-check", title: "Temos um protocolo ativo. A equipe entra em contato proativamente no mesmo dia", score: 100, color: "#22c55e" },
+          { icon: "alert-triangle", title: "Percebemos quando a falta se prolonga, mas a ação depende do professor", score: 50, color: "#eab308" },
+          { icon: "bell-off", title: "Só notamos a ausência quando o aluno ou os pais pedem o cancelamento", score: 0, color: "#ef4444" }
+        ]
+      },
+      {
+        id: 3,
+        text: "O aluno percebe imediatamente quando os setores da escola não conversam entre si. Como está a integração entre Comercial, Secretaria e Pedagógico?",
+        options: [
+          { icon: "users-round", title: "Totalmente alinhados. Compartilhamos informações do aluno em rituais constantes", score: 100, color: "#22c55e" },
+          { icon: "puzzle", title: "Cada setor faz a sua parte bem, mas a comunicação entre eles é falha", score: 50, color: "#eab308" },
+          { icon: "heart-crack", title: "Trabalhamos isolados. Muitas vezes o pedagógico não sabe o que o comercial prometeu", score: 0, color: "#ef4444" }
+        ]
+      },
+      {
+        id: 4,
+        text: "O fim do curso é o momento de maior vulnerabilidade para a saída do aluno. Como sua escola lida com a conclusão dos módulos?",
+        options: [
+          { icon: "graduation-cap", title: "Celebramos a conquista com rituais, reconhecimento e senso de dever cumprido", score: 100, color: "#22c55e" },
+          { icon: "minus", title: "O curso termina normalmente, com a entrega do certificado, sem muita celebração", score: 50, color: "#eab308" },
+          { icon: "x", title: "O aluno simplesmente para de vir e o vínculo se encerra sem cerimônia", score: 0, color: "#ef4444" }
+        ]
+      },
+      {
+        id: 5,
+        text: "A rematrícula deve ser uma consequência natural, não um esforço de última hora. Como sua escola aborda a renovação do aluno?",
+        options: [
+          { icon: "repeat", title: "Apresentamos o próximo passo de forma natural, antes do contrato acabar", score: 100, color: "#22c55e" },
+          { icon: "clock", title: "Fazemos campanhas de renovação no último mês, focando em descontos e prazos", score: 50, color: "#eab308" },
+          { icon: "user-x", title: "Esperamos o aluno procurar a secretaria ou partimos do princípio que ele vai embora", score: 0, color: "#ef4444" }
+        ]
+      },
+      {
+        id: 6,
+        text: "Aluno fiel é o melhor vendedor da escola. Hoje, de que forma os alunos atuais ajudam a trazer novos alunos?",
+        options: [
+          { icon: "user-plus", title: "Temos um programa estruturado e os alunos indicam espontaneamente", score: 100, color: "#22c55e" },
+          { icon: "users", title: "Alguns indicam por conta própria, mas não temos um processo que facilite isso", score: 50, color: "#eab308" },
+          { icon: "trending-down", title: "Raramente recebemos indicações. Dependemos quase 100% de marketing pago", score: 0, color: "#ef4444" }
+        ]
+      },
+      {
+        id: 7,
+        text: "Muitas vezes o aluno sai sem dizer o motivo real. Sua escola possui um canal ativo e constante de escuta e feedback dos alunos?",
+        options: [
+          { icon: "message-square", title: "Sim, coletamos feedbacks periódicos e agimos visivelmente sobre eles", score: 100, color: "#22c55e" },
+          { icon: "clipboard-list", title: "Fazemos pesquisas anuais, mas raramente mudamos algo com base nos resultados", score: 50, color: "#eab308" },
+          { icon: "eye-off", title: "Não temos um processo formal de escuta. Só sabemos o que ele pensa quando ele cancela", score: 0, color: "#ef4444" }
+        ]
+      }
+    ];
+    
+
+
 
     const pillarNames = {
       1: 'Recebimento', 2: 'Frequência', 3: 'Conclusão', 4: 'Rematrícula', 5: 'Indicação'
