@@ -189,7 +189,7 @@
     }
     .score-badge svg { width: 18px; height: 18px; }
     .results-title { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .score-phrase { font-size: 1.05rem; color: var(--color-neutral-400); max-width: 560px; margin: 0 auto; }
+    .score-phrase { font-size: 1.05rem; color: var(--color-neutral-400); max-width: 650px; margin: 0 auto; line-height: 1.5; }
 
     .market-compare {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
@@ -219,6 +219,18 @@
     .chart-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; }
     .chart-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; color: #fff; text-align: center; }
 
+    /* LEGENDA DE MATURIDADE */
+    .maturity-legend {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px;
+    }
+    @media(min-width: 768px) { .maturity-legend { grid-template-columns: 1fr; } }
+    .legend-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--color-neutral-300); }
+    .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .legend-dot.green { background: #22c55e; }
+    .legend-dot.yellow { background: #eab308; }
+    .legend-dot.orange { background: #f97316; }
+    .legend-dot.red { background: #ef4444; }
+
     .pillar-ranking { display: flex; flex-direction: column; gap: 16px; }
     .pillar-row { display: grid; grid-template-columns: 110px 1fr 44px; align-items: center; gap: 12px; }
     .pillar-name { font-size: 0.8rem; color: var(--color-neutral-400); text-align: right; line-height: 1.2; }
@@ -237,7 +249,7 @@
     .swot-item svg { width: 18px; height: 18px; flex-shrink: 0; }
     .swot-col.strengths .swot-item svg { color: #22c55e; }
     .swot-col.opportunities .swot-item svg { color: #eab308; }
-    .swot-empty { font-size: 0.9rem; color: var(--color-neutral-500); font-style: italic; line-height: 1.5; }
+    .swot-empty { font-size: 0.9rem; color: var(--color-neutral-300); font-style: italic; line-height: 1.5; }
 
     .insights-list { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; margin-bottom: 40px; }
     .insights-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 24px; color: #fff; text-align: center; }
@@ -304,6 +316,7 @@
       .cta-box h3 { font-size: 1.35rem; }
       .btn-row { flex-direction: column-reverse; }
       .btn-back { padding: 16px; }
+      .maturity-legend { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -374,6 +387,14 @@
         <div class="chart-card">
           <h3 class="chart-title">Mapa dos Pilares</h3>
           <canvas id="radarChart"></canvas>
+          
+          <!-- LEGENDA DE MATURIDADE -->
+          <div class="maturity-legend">
+            <div class="legend-item"><div class="legend-dot green"></div> <strong>85–100 | Referência:</strong> Nível de excelência. Servirá de modelo.</div>
+            <div class="legend-item"><div class="legend-dot yellow"></div> <strong>70–84 | Consolidado:</strong> Base sólida, com espaço para elevar o padrão.</div>
+            <div class="legend-item"><div class="legend-dot orange"></div> <strong>50–69 | Em Desenvolvimento:</strong> Funciona parcialmente, precisa de padronização.</div>
+            <div class="legend-item"><div class="legend-dot red"></div> <strong>0–49 | Prioridade Estratégica:</strong> Merece atenção imediata para reduzir riscos.</div>
+          </div>
         </div>
         <div class="chart-card">
           <h3 class="chart-title">Ranking dos 7 Pilares</h3>
@@ -509,11 +530,12 @@
     let scoreChartInstance = null;
     let radarChartInstance = null;
 
+    // NOVA LÓGICA DE PONTUAÇÃO: MAPA DE EVOLUÇÃO
     function getLevel(score) {
-      if (score >= 80) return { color: '#22c55e', label: 'EXCELENTE', icon: 'award', bg: 'rgba(34,197,94,0.15)', phrase: 'Sua escola é referência em fidelização. O Método FI® ajuda a sustentar e elevar ainda mais esse padrão de elite.' };
-      if (score >= 60) return { color: '#84cc16', label: 'BOM', icon: 'trending-up', bg: 'rgba(132,204,22,0.15)', phrase: 'Você já tem uma base sólida. Ajustar os pilares certos agora pode elevar bastante a sua retenção.' };
-      if (score >= 40) return { color: '#eab308', label: 'EM DESENVOLVIMENTO', icon: 'alert-triangle', bg: 'rgba(234,179,8,0.15)', phrase: 'Sua escola está em desenvolvimento. Estruturar alguns processos vai reduzir a perda de alunos nos próximos meses.' };
-      return { color: '#ef4444', label: 'NECESSITA ATENÇÃO', icon: 'alert-octagon', bg: 'rgba(239,68,68,0.15)', phrase: 'Sua escola necessita de atenção em pontos-chave. Quanto antes estruturar esses processos, menos alunos e receita você perde.' };
+      if (score >= 85) return { color: '#22c55e', label: 'REFERÊNCIA', icon: 'award', bg: 'rgba(34,197,94,0.15)', phrase: 'Seu processo demonstra elevado nível de maturidade. Durante a implantação, ele será refinado para servir de modelo aos demais pilares.' };
+      if (score >= 70) return { color: '#eab308', label: 'CONSOLIDADO', icon: 'trending-up', bg: 'rgba(234,179,8,0.15)', phrase: 'Existe uma base consistente, porém ainda há espaço para elevar o padrão e gerar resultados ainda melhores.' };
+      if (score >= 50) return { color: '#f97316', label: 'EM DESENVOLVIMENTO', icon: 'activity', bg: 'rgba(249,115,22,0.15)', phrase: 'O processo funciona parcialmente e precisa de maior padronização para alcançar resultados consistentes.' };
+      return { color: '#ef4444', label: 'PRIORIDADE ESTRATÉGICA', icon: 'alert-octagon', bg: 'rgba(239,68,68,0.15)', phrase: 'Esse pilar merece atenção imediata para reduzir riscos e fortalecer a jornada do aluno.' };
     }
 
     function renderQuestion() {
@@ -679,20 +701,20 @@
         return { id: id, name: pillarNames[id], score: answers[id] ? answers[id].score : 0 };
       }).sort(function(a, b) { return a.score - b.score; });
 
-      const weak = sorted.filter(function(p) { return p.score < 100; });
+      const weak = sorted.filter(function(p) { return p.score < 85; }); // Ajustado para a nova lógica
       let weakText = '';
       if (weak.length >= 2) {
-        weakText = ' Os pilares que mais pedem atenção neste momento são ' + weak[0].name + ' e ' + weak[1].name + ', e é exatamente neles que o Método FI® atua primeiro.';
+        weakText = ' Os pilares que mais pedem atenção para alcançar a excelência são ' + weak[0].name + ' e ' + weak[1].name + ', e é exatamente neles que o Método FI® atua primeiro.';
       } else if (weak.length === 1) {
-        weakText = ' O pilar que mais pede atenção neste momento é ' + weak[0].name + ', e é exatamente nele que o Método FI® atua primeiro.';
+        weakText = ' O pilar que mais pede atenção para alcançar a excelência é ' + weak[0].name + ', e é exatamente nele que o Método FI® atua primeiro.';
       }
 
       let base = '';
-      if (totalScore >= 80) {
+      if (totalScore >= 85) {
         base = 'Com base nas respostas, sua escola apresenta uma estrutura de fidelização madura e consistente, com processos que sustentam a retenção e a experiência do aluno em alto nível.';
-      } else if (totalScore >= 60) {
+      } else if (totalScore >= 70) {
         base = 'Com base nas respostas, sua escola possui uma boa estrutura operacional, mas ainda existem oportunidades claras para padronizar a experiência do aluno e fortalecer a integração entre os setores.';
-      } else if (totalScore >= 40) {
+      } else if (totalScore >= 50) {
         base = 'Com base nas respostas, sua escola opera com esforço manual em pontos que deveriam ser processo. Isso gera experiências inconsistentes para o aluno e deixa a retenção vulnerável.';
       } else {
         base = 'Com base nas respostas, sua escola ainda não conta com uma estrutura de fidelização definida. Isso faz com que a retenção dependa de esforço individual e não de método, o que explica a perda recorrente de alunos.';
@@ -774,10 +796,12 @@
       });
     }
 
+    // NOVA LÓGICA DE CORES DOS PILARES
     function pillarColor(score) {
-      if (score >= 75) return '#22c55e';
-      if (score >= 50) return '#eab308';
-      return '#ef4444';
+      if (score >= 85) return '#22c55e'; // 🟢 Referência
+      if (score >= 70) return '#eab308'; // 🟡 Consolidado
+      if (score >= 50) return '#f97316'; // 🟠 Em Desenvolvimento
+      return '#ef4444'; // 🔴 Prioridade Estratégica
     }
 
     function renderPillarRanking() {
@@ -808,45 +832,45 @@
 
     function renderSwot() {
       const strengths = Object.keys(pillarNames)
-        .filter(id => (answers[id] ? answers[id].score : 0) >= 75)
+        .filter(id => (answers[id] ? answers[id].score : 0) >= 70) // Ajustado para >= 70 (Consolidado ou Referência)
         .map(id => pillarNames[id]);
       const opportunities = Object.keys(pillarNames)
-        .filter(id => (answers[id] ? answers[id].score : 0) < 50)
+        .filter(id => (answers[id] ? answers[id].score : 0) < 85) // Tudo que não é Referência é oportunidade de evolução
         .map(id => pillarNames[id]);
 
       const sList = document.getElementById('strengthsList');
       if (strengths.length === 0) {
-        sList.innerHTML = '<div class="swot-empty">Consideramos <strong>ponto forte</strong> qualquer pilar acima de <strong>70% de maturidade</strong>. Nenhum dos seus atingiu esse patamar ainda, mas isso significa que há muito espaço para crescer. É exatamente aí que o Método FI® atua primeiro.</div>';
+        sList.innerHTML = '<div class="swot-empty">No Método FI®, um ponto forte não é considerado um trabalho concluído. É considerado uma oportunidade para elevar ainda mais o padrão de excelência da escola.</div>';
       } else {
         sList.innerHTML = strengths.map(n => '<div class="swot-item"><i data-lucide="check-circle-2"></i> ' + n + '</div>').join('');
       }
 
       const oList = document.getElementById('opportunitiesList');
       if (opportunities.length === 0) {
-        oList.innerHTML = '<div class="swot-empty">Nenhum pilar em nível crítico. O foco agora é elevar os que estão no meio para o topo.</div>';
+        oList.innerHTML = '<div class="swot-empty">Sua escola já atingiu o nível de Referência em todos os pilares. O próximo passo do Método FI® é manter esse padrão e torná-lo o modelo para outras instituições.</div>';
       } else {
-        oList.innerHTML = opportunities.map(n => '<div class="swot-item"><i data-lucide="alert-triangle"></i> ' + n + '</div>').join('');
+        oList.innerHTML = opportunities.map(n => '<div class="swot-item"><i data-lucide="trending-up"></i> ' + n + ' <span style="font-size:0.8rem; color:var(--color-neutral-400); margin-left:8px;">(Foco: elevar à excelência)</span></div>').join('');
       }
     }
 
     function generateInsights() {
       const insights = [];
-      if (answers[1] && answers[1].score < 100) insights.push({ type: 'warning', text: 'Sem um processo estruturado de acolhimento, a frequência futura fica comprometida desde o primeiro dia.' });
-      if (answers[2] && answers[2].score < 100) insights.push({ type: 'critical', text: 'Falta um protocolo ativo de acompanhamento. Aluno que não é sentido quando falta, é um aluno que evadiu silenciosamente.' });
-      if (answers[3] && answers[3].score < 100) insights.push({ type: 'critical', text: 'Setores desconectados geram experiências inconsistentes. O aluno percebe a falta de integração e isso quebra a confiança na instituição.' });
-      if (answers[4] && answers[4].score < 100) insights.push({ type: 'warning', text: 'A experiência do aluno precisa ser construída todos os dias. Ações esporádicas não sustentam o vínculo a longo prazo.' });
-      if (answers[5] && answers[5].score < 100) insights.push({ type: 'critical', text: 'Rematrícula não é campanha de último minuto. Ela deve ser apresentada como continuidade natural antes do fim do contrato.' });
-      if (answers[6] && answers[6].score < 100) insights.push({ type: 'warning', text: 'Sua escola está deixando de aproveitar o canal de aquisição mais barato e qualificado: a indicação de alunos atuais.' });
-      if (answers[7] && answers[7].score < 100) insights.push({ type: 'warning', text: 'Sem escuta ativa, a escola fica cega. Coletar feedback antes do cancelamento é a única forma de agir preventivamente.' });
+      if (answers[1] && answers[1].score < 85) insights.push({ type: 'warning', text: 'Sem um processo estruturado de acolhimento, a frequência futura fica comprometida desde o primeiro dia.' });
+      if (answers[2] && answers[2].score < 85) insights.push({ type: 'critical', text: 'Falta um protocolo ativo de acompanhamento. Aluno que não é sentido quando falta, é um aluno que evadiu silenciosamente.' });
+      if (answers[3] && answers[3].score < 85) insights.push({ type: 'critical', text: 'Setores desconectados geram experiências inconsistentes. O aluno percebe a falta de integração e isso quebra a confiança na instituição.' });
+      if (answers[4] && answers[4].score < 85) insights.push({ type: 'warning', text: 'A experiência do aluno precisa ser construída todos os dias. Ações esporádicas não sustentam o vínculo a longo prazo.' });
+      if (answers[5] && answers[5].score < 85) insights.push({ type: 'critical', text: 'Rematrícula não é campanha de último minuto. Ela deve ser apresentada como continuidade natural antes do fim do contrato.' });
+      if (answers[6] && answers[6].score < 85) insights.push({ type: 'warning', text: 'Sua escola está deixando de aproveitar o canal de aquisição mais barato e qualificado: a indicação de alunos atuais.' });
+      if (answers[7] && answers[7].score < 85) insights.push({ type: 'warning', text: 'Sem escuta ativa, a escola fica cega. Coletar feedback antes do cancelamento é a única forma de agir preventivamente.' });
 
-      if (insights.length === 0) insights.push({ type: 'positive', text: 'Parabéns! Sua escola domina a jornada do aluno de ponta a ponta. O Método FI® ajudará a sustentar e escalar esse padrão.' });
+      if (insights.length === 0) insights.push({ type: 'positive', text: 'Parabéns! Sua escola domina a jornada do aluno de ponta a ponta. O Método FI® ajudará a sustentar e escalar esse padrão de excelência.' });
 
       const negatives = insights.filter(i => i.type !== 'positive').length;
       const titleEl = document.getElementById('insightsTitle');
       if (negatives === 0) {
         titleEl.textContent = 'Sua escola é referência na Jornada do Aluno';
       } else {
-        titleEl.textContent = negatives + ' pontos que estão rompendo o ciclo de fidelização';
+        titleEl.textContent = negatives + ' pontos que estão impedindo sua escola de alcançar a excelência total';
       }
 
       const container = document.getElementById('insightsContainer');
@@ -862,12 +886,12 @@
 
     function renderRecommendations() {
       const recs = Object.keys(pillarNames)
-        .filter(id => (answers[id] ? answers[id].score : 0) < 75)
+        .filter(id => (answers[id] ? answers[id].score : 0) < 85) // Recomenda para tudo que não é Referência
         .map(id => recommendationsMap[id]);
 
       const list = document.getElementById('recommendationsList');
       if (recs.length === 0) {
-        list.innerHTML = '<div class="rec-item"><div class="rec-bullet"><i data-lucide="award"></i></div><div class="rec-text">Sua escola já opera em alto nível. O foco agora é sustentar os processos e criar rituais de melhoria contínua para não perder o padrão.</div></div>';
+        list.innerHTML = '<div class="rec-item"><div class="rec-bullet"><i data-lucide="award"></i></div><div class="rec-text">Sua escola já opera em nível de excelência. O foco agora é sustentar os processos e criar rituais de melhoria contínua para não perder o padrão.</div></div>';
       } else {
         list.innerHTML = recs.map(r => '<div class="rec-item"><div class="rec-bullet"><i data-lucide="arrow-right"></i></div><div class="rec-text">' + r + '</div></div>').join('');
       }
