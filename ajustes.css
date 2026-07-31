@@ -112,6 +112,11 @@
   margin-top: 0 !important;
   padding-top: 8px !important;
 }
+  /* Centralizar texto da barra de progresso */
+.progress-text {
+  margin-top: 0 !important;
+  padding-top: 12px !important;
+}
 
 /* =========================================================================
    v11 — ACABAMENTOS (tudo que faltava, numa peça só; o v10 acima segue intacto)
