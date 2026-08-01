@@ -1046,10 +1046,27 @@
       }
     }
 
-    function updateWhatsAppLink() {
+      function updateWhatsAppLink() {
       const link = document.getElementById('whatsappLink');
-      const baseHref = 'https://wa.me/5531984706404?text=Ol%C3%A1%2C%20Prof.%20Weverson!%20Completei%20o%20Radar%20FI%C2%AE%20e%20gostaria%20de%20solicitar%20uma%20apresenta%C3%A7%C3%A3o%20do%20M%C3%A9todo%20FI%C2%AE.%20Meu%20%C3%8Dndice%20FI%C2%AE%20foi%20de%20';
-      link.setAttribute('href', baseHref + totalScore);
+      
+      // Descobre os pilares críticos (menos de 50) e os outros
+      const sorted = Object.keys(pillarNames).map(function(id) {
+        return { id: id, name: pillarNames[id], score: answers[id] ? answers[id].score : 0 };
+      }).sort(function(a, b) { return a.score - b.score; });
+      
+      const critical = sorted.filter(function(p) { return p.score < 50; }).map(function(p) { return p.name + ' (' + p.score + ')'; });
+      const others = sorted.filter(function(p) { return p.score >= 50; }).map(function(p) { return p.name + ' (' + p.score + ')'; });
+      
+      const criticalText = critical.length > 0 ? critical.join(', ') : 'Nenhum';
+      const othersText = others.length > 0 ? others.join(', ') : 'Nenhum';
+      
+      const message = 'Olá, Weverson! Completei o Radar FI® e gostaria de entender como aplicar o Método FI® na minha escola.%0A%0A' +
+                      '📊 Meu Índice FI®: ' + totalScore + '%0A' +
+                      '🔴 Pilares Críticos (Prioridade Imediata): ' + criticalText + '%0A' +
+                      '🟡 Pilares a Fortalecer: ' + othersText + '%0A%0A' +
+                      'Gostaria de agendar uma conversa para entender o plano de implantação.';
+      
+      link.setAttribute('href', 'https://wa.me/5531984706404?text=' + message);
     }
 
     window.addEventListener('DOMContentLoaded', () => {
